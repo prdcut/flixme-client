@@ -7,7 +7,7 @@ export function RegistrationView(props) {
   const [email, setEmail] = useState('');
   const [birthdate, setBirthdate] = useState('');
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     console.log(username, password, email, birthdate);
     props.onRegister(username);
@@ -17,19 +17,19 @@ export function RegistrationView(props) {
     <form>
       <label>
         Username:
-        <input type="text" value={username} onChange={e => setUsername(e.target.value)} />
+        <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
       </label>
       <label>
         Password:
-        <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
+        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
       </label>
       <label>
         Email:
-        <input type="text" value={email} onChange={e => setEmail(e.target.value)} />
+        <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
       </label>
       <label>
         Birthdate:
-        <input type="text" value={birthdate} onChange={e => setBirthdate(e.target.value)} />
+        <input type="text" value={birthdate} onChange={(e) => setBirthdate(e.target.value)} />
       </label>
       <button type="submit" onClick={handleSubmit}>Submit</button>
     </form>
@@ -37,5 +37,11 @@ export function RegistrationView(props) {
 };
 
 RegistrationView.propTypes = {
+  register: PropTypes.shape({
+    username: PropTypes.string.isRequired,
+    password: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    birthdate: PropTypes.string.isRequired,
+  }),
   onRegister: PropTypes.func.isRequired,
 };

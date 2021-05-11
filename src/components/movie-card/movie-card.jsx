@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 
 export class MovieCard extends React.Component {
   render() {
-    const { movie, onMovieClick } = this.props;
+    const { movie, onClick } = this.props;
 
     return (
-      <div onClick={() => onMovieClick(newSelectedMovie)} className="movie-card">{movie.Title}</div>
+      <div onClick={() => onClick(movie)} className="movie-card">{movie.Title}</div>
     );
   }
 }
@@ -17,5 +17,5 @@ MovieCard.propTypes = {
     Description: PropTypes.string.isRequired,
     ImagePath: PropTypes.string.isRequired
   }).isRequired,
-  onMovieClick: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired
 };

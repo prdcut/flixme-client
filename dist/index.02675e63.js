@@ -26497,9 +26497,10 @@ try {
     constructor() {
       super();
       this.state = {
-        movies: [],
+        movies: null,
         selectedMovie: null,
-        user: null
+        user: null,
+        register: null
       };
     }
     componentDidMount() {
@@ -26511,9 +26512,9 @@ try {
         console.log(error);
       });
     }
-    onMovieClick(newSelectedMovie) {
+    setSelectedMovie(movie) {
       this.setState({
-        selectedMovie: newSelectedMovie
+        selectedMovie: movie
       });
     }
     onLoggedIn(user) {
@@ -26526,7 +26527,7 @@ try {
         register
       });
     }
-    onBackClick() {
+    setInitialState() {
       this.setState({
         selectedMovie: null
       });
@@ -26539,7 +26540,7 @@ try {
           __self: this,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 59,
+            lineNumber: 60,
             columnNumber: 23
           }
         })
@@ -26550,20 +26551,20 @@ try {
           __self: this,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 61,
+            lineNumber: 62,
             columnNumber: 27
           }
         })
       );
       // Before the movies have been loaded
-      if (movies.length === 0) return (
+      if (!movies) return (
         /*#__PURE__*/_reactDefault.default.createElement("div", {
           className: "main-view",
           __self: this,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 64,
-            columnNumber: 37
+            lineNumber: 65,
+            columnNumber: 25
           }
         })
       );
@@ -26573,30 +26574,30 @@ try {
           __self: this,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 67,
+            lineNumber: 68,
             columnNumber: 7
           }
         }, selectedMovie ? /*#__PURE__*/_reactDefault.default.createElement(_movieViewMovieView.MovieView, {
           movie: selectedMovie,
-          onBackClick: newSelectedMovie => {
-            this.setSelectedMovie(newSelectedMovie);
+          onClick: () => {
+            this.setInitialState();
           },
           __self: this,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 70,
+            lineNumber: 71,
             columnNumber: 13
           }
         }) : movies.map(movie => /*#__PURE__*/_reactDefault.default.createElement(_movieCardMovieCard.MovieCard, {
           key: movie._id,
           movie: movie,
-          onMovieClick: newSelectedMovie => {
-            this.setSelectedMovie(newSelectedMovie);
+          onClick: movie => {
+            this.setSelectedMovie(movie);
           },
           __self: this,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 72,
+            lineNumber: 73,
             columnNumber: 13
           }
         })))
@@ -26628,10 +26629,10 @@ try {
   var _jsxFileName = "/Users/felipo/Documents/WebDev/flixme-client/src/components/movie-card/movie-card.jsx";
   class MovieCard extends _reactDefault.default.Component {
     render() {
-      const {movie, onMovieClick} = this.props;
+      const {movie, onClick} = this.props;
       return (
         /*#__PURE__*/_reactDefault.default.createElement("div", {
-          onClick: () => onMovieClick(newSelectedMovie),
+          onClick: () => onClick(movie),
           className: "movie-card",
           __self: this,
           __source: {
@@ -26649,7 +26650,7 @@ try {
       Description: _propTypesDefault.default.string.isRequired,
       ImagePath: _propTypesDefault.default.string.isRequired
     }).isRequired,
-    onMovieClick: _propTypesDefault.default.func.isRequired
+    onClick: _propTypesDefault.default.func.isRequired
   };
   helpers.postlude(module);
 } finally {
@@ -27484,15 +27485,20 @@ try {
   var _propTypesDefault = _parcelHelpers.interopDefault(_propTypes);
   var _jsxFileName = "/Users/felipo/Documents/WebDev/flixme-client/src/components/movie-view/movie-view.jsx";
   class MovieView extends _reactDefault.default.Component {
+    constructor() {
+      super();
+      this.state = {};
+    }
     render() {
-      const {movie, onBackClick} = this.props;
+      const {movie, onClick} = this.props;
+      if (!movie) return null;
       return (
         /*#__PURE__*/_reactDefault.default.createElement("div", {
           className: "movie-view",
           __self: this,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 10,
+            lineNumber: 18,
             columnNumber: 7
           }
         }, /*#__PURE__*/_reactDefault.default.createElement("div", {
@@ -27500,7 +27506,7 @@ try {
           __self: this,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 11,
+            lineNumber: 19,
             columnNumber: 9
           }
         }, /*#__PURE__*/_reactDefault.default.createElement("img", {
@@ -27508,7 +27514,7 @@ try {
           __self: this,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 12,
+            lineNumber: 20,
             columnNumber: 11
           }
         })), /*#__PURE__*/_reactDefault.default.createElement("div", {
@@ -27516,7 +27522,7 @@ try {
           __self: this,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 14,
+            lineNumber: 22,
             columnNumber: 9
           }
         }, /*#__PURE__*/_reactDefault.default.createElement("span", {
@@ -27524,7 +27530,7 @@ try {
           __self: this,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 15,
+            lineNumber: 23,
             columnNumber: 11
           }
         }, "Title: "), /*#__PURE__*/_reactDefault.default.createElement("span", {
@@ -27532,7 +27538,7 @@ try {
           __self: this,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 16,
+            lineNumber: 24,
             columnNumber: 11
           }
         }, movie.Title)), /*#__PURE__*/_reactDefault.default.createElement("div", {
@@ -27540,7 +27546,7 @@ try {
           __self: this,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 18,
+            lineNumber: 26,
             columnNumber: 9
           }
         }, /*#__PURE__*/_reactDefault.default.createElement("span", {
@@ -27548,7 +27554,7 @@ try {
           __self: this,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 19,
+            lineNumber: 27,
             columnNumber: 11
           }
         }, "Description: "), /*#__PURE__*/_reactDefault.default.createElement("span", {
@@ -27556,17 +27562,89 @@ try {
           __self: this,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 20,
+            lineNumber: 28,
             columnNumber: 11
           }
-        }, movie.Description)), /*#__PURE__*/_reactDefault.default.createElement("button", {
+        }, movie.description)), /*#__PURE__*/_reactDefault.default.createElement("div", {
+          className: "movie-genre",
+          __self: this,
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 30,
+            columnNumber: 9
+          }
+        }, /*#__PURE__*/_reactDefault.default.createElement("span", {
+          className: "label",
+          __self: this,
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 31,
+            columnNumber: 11
+          }
+        }, "Genre: "), /*#__PURE__*/_reactDefault.default.createElement("span", {
+          className: "value",
+          __self: this,
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 32,
+            columnNumber: 11
+          }
+        }, movie.genre)), /*#__PURE__*/_reactDefault.default.createElement("div", {
+          className: "movie-director",
+          __self: this,
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 34,
+            columnNumber: 9
+          }
+        }, /*#__PURE__*/_reactDefault.default.createElement("span", {
+          className: "label",
+          __self: this,
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 35,
+            columnNumber: 11
+          }
+        }, "Director: "), /*#__PURE__*/_reactDefault.default.createElement("span", {
+          className: "value",
+          __self: this,
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 36,
+            columnNumber: 11
+          }
+        }, movie.director)), /*#__PURE__*/_reactDefault.default.createElement("div", {
+          className: "movie-featured",
+          __self: this,
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 38,
+            columnNumber: 9
+          }
+        }, /*#__PURE__*/_reactDefault.default.createElement("span", {
+          className: "label",
+          __self: this,
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 39,
+            columnNumber: 11
+          }
+        }, "Featured: "), /*#__PURE__*/_reactDefault.default.createElement("span", {
+          className: "value",
+          __self: this,
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 40,
+            columnNumber: 11
+          }
+        }, movie.featured)), /*#__PURE__*/_reactDefault.default.createElement("button", {
           onClick: () => {
-            onBackClick(null);
+            onClick();
           },
           __self: this,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 22,
+            lineNumber: 42,
             columnNumber: 9
           }
         }, "Back"))
@@ -27585,13 +27663,12 @@ try {
         Birth: _propTypesDefault.default.string.isRequred,
         Death: _propTypesDefault.default.string
       }),
-      Actors: _propTypesDefault.default.string,
       Title: _propTypesDefault.default.string.isRequired,
       Description: _propTypesDefault.default.string.isRequired,
       ImagePath: _propTypesDefault.default.string.isRequired,
       Featured: _propTypesDefault.default.bool.isRequired
     }).isRequired,
-    onMovieClick: _propTypesDefault.default.func.isRequired
+    onClick: _propTypesDefault.default.func.isRequired
   };
   helpers.postlude(module);
 } finally {
@@ -29364,7 +29441,7 @@ try {
     _s();
     const [username, setUsername] = _react.useState('');
     const [password, setPassword] = _react.useState('');
-    const handleSubmit = () => {
+    const handleSubmit = e => {
       e.preventDefault();
       console.log(username, password);
       /*Send a request to the server for authentication*/
@@ -29428,7 +29505,12 @@ try {
   _s(LoginView, "wuQOK7xaXdVz4RMrZQhWbI751Oc=");
   _c = LoginView;
   LoginView.propTypes = {
-    onLoggedIn: _propTypesDefault.default.func.isRequired
+    user: _propTypesDefault.default.shape({
+      username: _propTypesDefault.default.string.isRequired,
+      password: _propTypesDefault.default.string.isRequired
+    }),
+    onLoggedIn: _propTypesDefault.default.func.isRequired,
+    onRegister: _propTypesDefault.default.func
   };
   var _c;
   $RefreshReg$(_c, "LoginView");
@@ -29460,7 +29542,7 @@ try {
     const [password, setPassword] = _react.useState('');
     const [email, setEmail] = _react.useState('');
     const [birthdate, setBirthdate] = _react.useState('');
-    const handleSubmit = () => {
+    const handleSubmit = e => {
       e.preventDefault();
       console.log(username, password, email, birthdate);
       props.onRegister(username);
@@ -29557,6 +29639,12 @@ try {
   _c = RegistrationView;
   ;
   RegistrationView.propTypes = {
+    register: _propTypesDefault.default.shape({
+      username: _propTypesDefault.default.string.isRequired,
+      password: _propTypesDefault.default.string.isRequired,
+      email: _propTypesDefault.default.string.isRequired,
+      birthdate: _propTypesDefault.default.string.isRequired
+    }),
     onRegister: _propTypesDefault.default.func.isRequired
   };
   var _c;

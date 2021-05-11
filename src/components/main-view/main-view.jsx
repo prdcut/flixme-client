@@ -11,9 +11,10 @@ export class MainView extends React.Component {
   constructor() {
     super();
     this.state = {
-      movies: [],
+      movies: null,
       selectedMovie: null,
-      user: null
+      user: null,
+      register: null,
     }
   }
 
@@ -29,9 +30,9 @@ export class MainView extends React.Component {
       });
   }
 
-  onMovieClick(newSelectedMovie) {
+  setSelectedMovie(movie) {
     this.setState({
-      selectedMovie: newSelectedMovie
+      selectedMovie: movie
     });
   }
 
@@ -47,7 +48,7 @@ export class MainView extends React.Component {
     });
   }
 
-  onBackClick() {
+  setInitialState() {
     this.setState({
       selectedMovie: null
     });
@@ -56,20 +57,20 @@ export class MainView extends React.Component {
   render() {
     const { movies, selectedMovie, user, register } = this.state;
 
-    if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+    if (!user) return <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />;
 
     if (!register) return <RegistrationView onRegister={(register) => this.onRegister(register)} />;
 
     // Before the movies have been loaded
-    if (movies.length === 0) return <div className="main-view" />;
+    if (!movies) return <div className="main-view" />;
 
     return (
       <div className="main-view">
         {/*If the state of `selectedMovie` is not null, that selected movie will be returned otherwise, all *movies will be returned*/}
         {selectedMovie
-          ? <MovieView movie={selectedMovie} onBackClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }} />
+          ? <MovieView movie={selectedMovie} onClick={() => { this.setInitialState(); }} />
           : movies.map(movie => (
-            <MovieCard key={movie._id} movie={movie} onMovieClick={(newSelectedMovie) => { this.setSelectedMovie(newSelectedMovie) }} />
+            <MovieCard key={movie._id} movie={movie} onClick={(movie) => { this.setSelectedMovie(movie) }} />
           ))
         }
       </div>

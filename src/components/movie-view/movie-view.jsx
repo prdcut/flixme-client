@@ -3,8 +3,16 @@ import PropTypes from 'prop-types';
 
 export class MovieView extends React.Component {
 
+  constructor() {
+    super();
+
+    this.state = {};
+  }
+
   render() {
-    const { movie, onBackClick } = this.props;
+    const { movie, onClick } = this.props;
+
+    if (!movie) return null;
 
     return (
       <div className="movie-view">
@@ -17,9 +25,21 @@ export class MovieView extends React.Component {
         </div>
         <div className="movie-description">
           <span className="label">Description: </span>
-          <span className="value">{movie.Description}</span>
+          <span className="value">{movie.description}</span>
         </div>
-        <button onClick={() => { onBackClick(null); }}>Back</button>
+        <div className="movie-genre">
+          <span className="label">Genre: </span>
+          <span className="value">{movie.genre}</span>
+        </div>
+        <div className="movie-director">
+          <span className="label">Director: </span>
+          <span className="value">{movie.director}</span>
+        </div>
+        <div className="movie-featured">
+          <span className="label">Featured: </span>
+          <span className="value">{movie.featured}</span>
+        </div>
+        <button onClick={() => { onClick(); }}>Back</button>
 
       </div>
     );
@@ -38,11 +58,10 @@ MovieView.propTypes = {
       Birth: PropTypes.string.isRequred,
       Death: PropTypes.string
     }),
-    Actors: PropTypes.string,
     Title: PropTypes.string.isRequired,
     Description: PropTypes.string.isRequired,
     ImagePath: PropTypes.string.isRequired,
     Featured: PropTypes.bool.isRequired
   }).isRequired,
-  onMovieClick: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired
 };
