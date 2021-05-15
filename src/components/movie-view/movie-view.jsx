@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
 
 export class MovieView extends React.Component {
 
@@ -15,32 +17,29 @@ export class MovieView extends React.Component {
     if (!movie) return null;
 
     return (
-      <div className="movie-view">
-        <div className="movie-poster">
-          <img src={movie.ImagePath} />
-        </div>
-        <div className="movie-title">
-          <span className="label">Title: </span>
-          <span className="value">{movie.Title}</span>
-        </div>
-        <div className="movie-description">
-          <span className="label">Description: </span>
-          <span className="value">{movie.description}</span>
-        </div>
-        <div className="movie-genre">
-          <span className="label">Genre: </span>
-          <span className="value">{movie.genre}</span>
-        </div>
-        <div className="movie-director">
-          <span className="label">Director: </span>
-          <span className="value">{movie.director}</span>
-        </div>
-        <div className="movie-featured">
-          <span className="label">Featured: </span>
-          <span className="value">{movie.featured}</span>
-        </div>
-        <button onClick={() => { onClick(); }}>Back</button>
+      <div className="p-3 m-3">
+        <Card className="p-3" bg="warning" text="white">
+          <Card.Img variant="top" src={movie.ImagePath} />
+          <Card.Body>
+            <Card.Title className="text-center p-3">
+              <h3>{movie.Title}</h3>
+            </Card.Title>
 
+            <Card.Subtitle className="mb-2 text-muted">Description</Card.Subtitle>
+            <Card.Text>{movie.Description}</Card.Text>
+
+            <Card.Subtitle className="mb-2 text-muted">Genre</Card.Subtitle>
+            <Card.Text>[{"movie.Genre"}]</Card.Text>
+
+            <Card.Subtitle className="mb-2 text-muted">Director</Card.Subtitle>
+            <Card.Text>[{"movie.Director"}]</Card.Text>
+
+            <Card.Subtitle className="mb-2 text-muted">Featured</Card.Subtitle>
+            <Card.Text>{movie.Featured}</Card.Text>
+
+            <Button onClick={() => { onClick(); }} variant="secondary" block>Back</Button>
+          </Card.Body>
+        </Card>
       </div>
     );
   }
