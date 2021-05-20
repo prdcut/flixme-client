@@ -29,7 +29,7 @@ export class MovieView extends React.Component {
             <Card.Text>{movie.Description}</Card.Text>
 
             <Card.Subtitle className="mb-2 text-muted">Genre</Card.Subtitle>
-            <Card.Text>[{movie.Genre.Name}]</Card.Text>
+            <Card.Text>{movie.Genre.Name}</Card.Text>
 
             <Card.Subtitle className="mb-2 text-muted">Director</Card.Subtitle>
             <Card.Text>{movie.Director.Name}</Card.Text>

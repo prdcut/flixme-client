@@ -28152,7 +28152,7 @@ try {
             lineNumber: 32,
             columnNumber: 13
           }
-        }, "[", movie.Genre.Name, "]"), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapCardDefault.default.Subtitle, {
+        }, movie.Genre.Name), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapCardDefault.default.Subtitle, {
           className: "mb-2 text-muted",
           __self: this,
           __source: {
