@@ -1,13 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import Col from 'react-bootstrap/Col';
+
+import { Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 export class MovieView extends React.Component {
 
   constructor() {
     super();
-
     this.state = {};
   }
 
@@ -29,15 +33,20 @@ export class MovieView extends React.Component {
             <Card.Text>{movie.Description}</Card.Text>
 
             <Card.Subtitle className="mb-2 text-muted">Genre</Card.Subtitle>
-            <Card.Text>{movie.Genre.Name}</Card.Text>
+            <Card.Text>
+              <Link to={`/genres/${movie.Genre.Name}`}>
+                <Button variant="link">{movie.Genre.Name}</Button>
+              </Link>
+            </Card.Text>
 
             <Card.Subtitle className="mb-2 text-muted">Director</Card.Subtitle>
-            <Card.Text>{movie.Director.Name}</Card.Text>
-
-            <Card.Subtitle className="mb-2 text-muted">Featured</Card.Subtitle>
-            <Card.Text>{movie.Featured}</Card.Text>
-
+            <Card.Text>
+              <Link to={`/genres/${movie.Director.Name}`}>
+                <Button variant="link">{movie.Director.Name}</Button>
+              </Link>
+            </Card.Text>
             <Button onClick={() => { onClick(); }} variant="secondary" block>Back</Button>
+
           </Card.Body>
         </Card>
       </div>
@@ -60,7 +69,6 @@ MovieView.propTypes = {
     Title: PropTypes.string.isRequired,
     Description: PropTypes.string.isRequired,
     ImagePath: PropTypes.string.isRequired,
-    Featured: PropTypes.bool.isRequired
   }).isRequired,
   onClick: PropTypes.func.isRequired
 };
