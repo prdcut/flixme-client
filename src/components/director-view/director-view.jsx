@@ -17,52 +17,35 @@ export class DirectorView extends React.Component {
   }
 
   render() {
-    const { movie, director } = this.props;
+    const { movie, onClick } = this.props;
 
-    if (!director) return null;
+    if (!movie) return null;
 
     return (
       <Container>
+        <Row className="text-right">
+          <Button variant="dark" className="m-4" onClick={() => { this.onLoggedOut() }}>Logout</Button>
+        </Row>
         <Row className="p-3 m-3">
           <Card className="p-3" bg="warning" text="white">
             <Card.Body>
               <Card.Title className="text-center p-3">
-                <h3>{director.Director.Name}</h3>
+                <h3>{movie.Director.Name}</h3>
               </Card.Title>
 
               <Card.Subtitle className="mb-2 text-muted">Born:</Card.Subtitle>
-              <Card.Text>{director.Director.Birth}</Card.Text>
+              <Card.Text>{movie.Director.Birth}</Card.Text>
 
               <Card.Subtitle className="mb-2 text-muted">Died:</Card.Subtitle>
-              <Card.Text>{director.Director.Death}</Card.Text>
+              <Card.Text>{movie.Director.Death}</Card.Text>
 
               <Card.Subtitle className="mb-2 text-muted">Biography</Card.Subtitle>
-              <Card.Text>{director.Director.Bio}</Card.Text>
+              <Card.Text>{movie.Director.Bio}</Card.Text>
 
-              // return or go back???
+              <Button onClick={() => { onClick(); }} variant="secondary" block>Back</Button>
 
             </Card.Body>
           </Card>
-        </Row>
-        <Row>
-          <h4>More {director.Director.Name}'s movies</h4>
-        </Row>
-        <Row>
-          {movie.map((movie) => {
-            if (movie.Director.Name === director.Director.Name) {
-              return (
-                <Card className="p-3" border="warning">
-                  <Card.Img variant="top" src={movie.ImagePath} alt="movie poster" />
-                  <Card.Footer className="text-center">
-                    <h4>{movie.Title}</h4>
-                  </Card.Footer>
-                  <Link to={`/movies/${movie._id}`}>
-                    <Button variant="link">More</Button>
-                  </Link>
-                </Card>
-              )
-            }
-          })}
         </Row>
       </Container>
     )

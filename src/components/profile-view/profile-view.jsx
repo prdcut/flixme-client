@@ -25,8 +25,13 @@ export class ProfileView extends React.Component {
   }
 
   componentDidMount() {
-    let accessToken = localStorage.getItem("token");
-    this.getUser(accessToken);
+    let accessToken = localStorage.getItem('token');
+    if (accessToken !== null) {
+      this.setState({
+        user: localStorage.getItem('user')
+      });
+      this.getMovies(accessToken);
+    }
   }
 
   getUser(token) {
@@ -38,7 +43,7 @@ export class ProfileView extends React.Component {
           Username: response.data.Username,
           Password: response.data.Password,
           Email: response.data.Email,
-          Birthdate: this.formatDate(response.data.Birthdate),
+          Birthdate: response.data.Birthdate,
           FavoriteMovies: response.data.FavoriteMovies,
         });
       });
@@ -77,8 +82,11 @@ export class ProfileView extends React.Component {
 
     if (!movies) alert("Plsease sign in");
     return (
-      <div className="userProfile" style={{ display: "flex" }}>
-        <Container>
+      <Container>
+        <Row className="text-right">
+          <Button variant="dark" className="m-4" onClick={() => { this.onLoggedOut() }}>Logout</Button>
+        </Row>
+        <div className="userProfile" style={{ display: "flex" }}>
           <Row>
             <Col>
               <Form style={{ width: "24rem", float: "left" }}>
@@ -153,8 +161,8 @@ export class ProfileView extends React.Component {
               </div>
             </Col>
           </Row>
-        </Container>
-      </div>
+        </div>
+      </Container >
     );
   }
 }

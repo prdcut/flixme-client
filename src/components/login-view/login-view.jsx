@@ -43,7 +43,6 @@ export function LoginView(props) {
       </Form.Group>
 
       <Button variant="warning" type="submit" size="lg" block onClick={handleSubmit}>Submit</Button>
-
     </Form>
   );
 }

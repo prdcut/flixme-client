@@ -72,11 +72,8 @@ export class MainView extends React.Component {
     const { movies, user } = this.state;
     return (
       <Router>
-        <Row className="text-right">
-          <Button variant="dark" className="m-4" onClick={() => { this.onLoggedOut() }}>Logout</Button>
-        </Row>
         <Row className="main-view justify-content-md-center">
-          <Route exact path="/" render={() => {
+          <Route exact path="/movies" render={() => {
             if (!user) return <Col>
               <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
             </Col>
@@ -87,14 +84,14 @@ export class MainView extends React.Component {
               </Col>
             ))
           }} />
-          <Route path="/register" render={() => {
+          <Route path="/users" render={() => {
             if (user) return <Redirect to="/" />
             return <Col>
               <RegistrationView />
             </Col>
           }} />
 
-          <Route path="/movies/:movieId" render={({ match, history }) => {
+          <Route path="/movies/:Title" render={({ match, history }) => {
             if (!user) return <Col>
               <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
             </Col>
@@ -104,7 +101,7 @@ export class MainView extends React.Component {
             </Col>
           }} />
 
-          <Route path="/directors/:name" render={({ match, history }) => {
+          <Route path="/movies/director/:Name" render={({ match, history }) => {
             if (!user) return <Col>
               <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
             </Col>
@@ -115,7 +112,7 @@ export class MainView extends React.Component {
           }
           } />
 
-          <Route path="/genres/:name" render={({ match, history }) => {
+          <Route path="/movies/genre/:Name" render={({ match, history }) => {
             if (!user) return <Col>
               <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
             </Col>

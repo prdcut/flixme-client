@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 import { Link } from 'react-router-dom';
@@ -22,6 +23,9 @@ export class MovieView extends React.Component {
 
     return (
       <div className="p-3 m-3">
+        <Row className="text-right">
+          <Button variant="dark" className="m-4" onClick={() => { this.onLoggedOut() }}>Logout</Button>
+        </Row>
         <Card className="p-3" bg="warning" text="white">
           <Card.Img variant="top" src={movie.ImagePath} />
           <Card.Body>
@@ -69,6 +73,6 @@ MovieView.propTypes = {
     Title: PropTypes.string.isRequired,
     Description: PropTypes.string.isRequired,
     ImagePath: PropTypes.string.isRequired,
-  }).isRequired,
+  }),
   onClick: PropTypes.func.isRequired
 };
