@@ -10,7 +10,7 @@ import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 
 import { Link } from 'react-router-dom';
-import { BrowserRouter as Router, Route } from "react-router-dom";
+
 
 export class ProfileView extends React.Component {
   constructor(props) {
@@ -25,13 +25,8 @@ export class ProfileView extends React.Component {
   }
 
   componentDidMount() {
-    let accessToken = localStorage.getItem('token');
-    if (accessToken !== null) {
-      this.setState({
-        user: localStorage.getItem('user')
-      });
-      this.getMovies(accessToken);
-    }
+    let accessToken = localStorage.getItem("token");
+    this.getUser(accessToken);
   }
 
   getUser(token) {
@@ -46,22 +41,36 @@ export class ProfileView extends React.Component {
           Birthdate: response.data.Birthdate,
           FavoriteMovies: response.data.FavoriteMovies,
         });
+      })
+      .catch(function (error) {
+        console.log(error);
       });
   }
 
   removeFavorite(movie) {
-    axios.delete('https://flixmebackend.herokuapp.com/users', {
-      headers: { Authotization: `Bearer ${localStorage.getItem("token")}` },
+    let token = localStorage.getItem("token");
+    let url =
+      'https://flixmebackend.herokuapp.com/users/' +
+      localStorage.getItem("user") +
+      "/favorites/" +
+      movie._id;
+
+    axios.delete(url, {
+      headers: { Authotization: `Bearer ${token}` },
     })
       .then((response) => {
         console.log(response);
         this.componentDidMount();
+        alert(movie.Title + "has been removed from your favorite list.")
       });
   }
 
   handleDeregister() {
-    axios.delete(`https://flixmebackend.herokuapp.com/users/${localStorage.getItem("user")}`, {
-      headers: { Authotization: `Bearer ${localStorage.getItem("token")}` },
+    const token = localStorage.getItem("token");
+    const user = localStorage.getItem("user");
+
+    axios.delete(`https://flixmebackend.herokuapp.com/users/${user}`, {
+      headers: { Authotization: `Bearer ${token}` },
     })
       .then(() => {
         alter(user + " has been deleted.");
@@ -73,6 +82,68 @@ export class ProfileView extends React.Component {
         console.log(error);
       });
   }
+
+  handleUpdate(e) {
+    let token = localStorage.getItem("token");
+    let user = localStorage.getItem("user");
+    console.log(this.state);
+    let setisValid = this.formValidation();
+    if (setisValid) {
+      console.log(this.props.setProfile(this.state));
+      axios
+        .put(
+          `https://flixmebackend.herokuapp.com/users/${user}`,
+          {
+            Username: this.state.Username,
+            Password: this.state.Password,
+            Email: this.state.Email,
+            Birthdate: this.state.Birthdate,
+          },
+          { headers: { Authorization: `Bearer ${token}` } }
+        )
+        .then((response) => {
+          const data = response.data;
+          localStorage.setItem("user", data.Username);
+          console.log(data);
+          alert(user + " has been updated.");
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error.response.data);
+        });
+    }
+  }
+
+  formValidation() {
+    let UsernameError = {};
+    let EmailError = {};
+    let PasswordError = {};
+    let BirthdateError = {};
+    let isValid = true;
+    if (this.state.Username.trim().length < 5) {
+      UsernameError.usernameShort = "Must be alphanumeric and contain at least 5 characters";
+      isValid = false;
+    }
+    if (this.state.Password.trim().length < 3) {
+      PasswordError.passwordMissing = "You must enter a current or new password.(minimum 4 characters) ";
+      isValid = false;
+    }
+    if (!(this.state.Email && this.state.Email.includes(".") && this.state.Email.includes("@"))) {
+      EmailError.emailNotEmail = "A valid email address is required.";
+      isValid = false;
+    }
+    if (this.state.birthdate === '') {
+      BirthdateError.birthdateEmpty = "Please enter your birthdate.";
+      isValid = false;
+    }
+    this.setState({
+      UsernameError: UsernameError,
+      PasswordError: PasswordError,
+      EmailError: EmailError,
+      BirthdateError: BirthdateError,
+    })
+    return isValid;
+  };
 
   render() {
     const { movies } = this.props;

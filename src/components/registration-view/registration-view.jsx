@@ -18,7 +18,7 @@ export function RegistrationView(props) {
       Username: username,
       Password: password,
       Email: email,
-      Birthday: birthday
+      Birthdate: birthdate
     })
       .then(response => {
         const data = response.data;

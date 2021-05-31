@@ -59,5 +59,5 @@ DirectorView.propTypes = {
       Bio: PropTypes.string.isRequired,
       Birth: PropTypes.string.isRequired,
     },
-  }).isRequired,
+  })
 };

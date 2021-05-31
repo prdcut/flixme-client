@@ -34850,7 +34850,7 @@ try {
         Username: username,
         Password: password,
         Email: email,
-        Birthday: birthday
+        Birthdate: birthdate
       }).then(response => {
         const data = response.data;
         console.log(data);

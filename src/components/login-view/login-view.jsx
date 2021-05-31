@@ -4,7 +4,9 @@ import axios from 'axios';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
 
+import './login-view.scss';
 
 export function LoginView(props) {
   const [username, setUsername] = useState('');
@@ -26,24 +28,26 @@ export function LoginView(props) {
   };
 
   return (
-    <Form>
-      <h2>Log In</h2>
-      <Form.Group controlId="formUsername">
-        <Form.Label>
-          <b>Username</b>
-        </Form.Label>
-        <Form.Control type="text" placeholder="Enter Username" value={username} onChange={(e) => setUsername(e.target.value)} />
-      </Form.Group>
+    <Card className="p-3" bg="warning" text="white">
+      <Form>
+        <h4 className="text-info text-center m-3">Log In</h4>
+        <Form.Group controlId="formUsername">
+          <Form.Label>
+            <b className="text-secondary">Username</b>
+          </Form.Label>
+          <Form.Control type="text" placeholder="Enter Username" value={username} onChange={(e) => setUsername(e.target.value)} />
+        </Form.Group>
 
-      <Form.Group controlId="formPassword">
-        <Form.Label>
-          <b>Password</b>
-        </Form.Label>
-        <Form.Control type="password" placeholder="Enter Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-      </Form.Group>
+        <Form.Group controlId="formPassword">
+          <Form.Label>
+            <b className="text-secondary">Password</b>
+          </Form.Label>
+          <Form.Control type="password" placeholder="Enter Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        </Form.Group>
 
-      <Button variant="warning" type="submit" size="lg" block onClick={handleSubmit}>Submit</Button>
-    </Form>
+        <Button variant="dark" className="text-info" type="submit" size="lg" block="md" onClick={handleSubmit}>Submit</Button>
+      </Form>
+    </Card>
   );
 }
 

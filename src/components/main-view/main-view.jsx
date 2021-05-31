@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect, Link } from "react-router-dom";
 
 import { LoginView } from '../login-view/login-view';
 import { MovieCard } from '../movie-card/movie-card';
@@ -13,6 +13,12 @@ import { RegistrationView } from '../registration-view/registration-view';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
+import Form from 'react-bootstrap/Form';
+import FormControl from 'react-bootstrap/FormControl';
+
+import './main-view.scss';
 
 export class MainView extends React.Component {
 
@@ -72,14 +78,48 @@ export class MainView extends React.Component {
     const { movies, user } = this.state;
     return (
       <Router>
-        <Row className="main-view justify-content-md-center">
-          <Route exact path="/movies" render={() => {
+        <div className="main-view justify-conten-center">
+
+          <Navbar bg="dark" expand="lg" sticky="top" className="mb-5 shadow-lg">
+            <Navbar.Brand href="http://localhost:1234">
+              <img src="../../../img/logo.svg" width="30" height="30" className="d-inline-block align-top" alt="flixMe logo" />{' '}
+              <h1 className="text-info">flixMe</h1>
+            </Navbar.Brand>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
+              {!user ? (
+                <div>
+                  <Link to={`/`}>
+                    <Button variant="link" className="m-2 navbar-link text-warning">Login</Button>
+                  </Link>
+                  <Link to={`/register`}>
+                    <Button variant="link" className="m-2 navbar-link text-warning">Register</Button>
+                  </Link>
+                </div>
+              ) : (
+                <div>
+                  <Link to={`/`}>
+                    <Button variant="link" className="m-2 navbar-link text-warning">Movies</Button>
+                  </Link>
+                  <Link to={`/users/${user}`}>
+                    <Button variant="link" className="m-2 navbar-link text-warning">My Profile</Button>
+                  </Link>
+                  <Link to={`/`}>
+                    <Button variant="link" className="m-2 navbar-link text-warning" onClick={() => this.onLoggedOut()}>Logout</Button>
+                  </Link >
+                </div>
+              )
+              }
+            </Navbar.Collapse>
+          </Navbar>
+
+          <Route exact path="/" render={() => {
             if (!user) return <Col>
               <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
             </Col>
             if (movies.length === 0) return <div className="main-view" />;
             return movies.map(m => (
-              <Col md={3} key={m._id}>
+              <Col key={m._id}>
                 <MovieCard movie={m} />
               </Col>
             ))
@@ -96,8 +136,8 @@ export class MainView extends React.Component {
               <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
             </Col>
             if (movies.length === 0) return <div className="main-view" />;
-            return <Col md={8}>
-              <MovieView movie={movies.find(m => m._id === match.params.movieId)} onClick={() => history.goBack()} />
+            return <Col>
+              <MovieView movie={movies.find(m => m._id === match.params.Title)} onClick={() => history.goBack()} />
             </Col>
           }} />
 
@@ -106,8 +146,8 @@ export class MainView extends React.Component {
               <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
             </Col>
             if (movies.length === 0) return <div className="main-view" />;
-            return <Col md={8}>
-              <DirectorView director={movies.find(m => m.Director.Name === match.params.name).Director} onClick={() => history.goBack()} />
+            return <Col>
+              <DirectorView director={movies.find(m => m.Director.Name === match.params.Name).Director} onClick={() => history.goBack()} />
             </Col>
           }
           } />
@@ -117,12 +157,13 @@ export class MainView extends React.Component {
               <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
             </Col>
             if (movies.length === 0) return <div className="main-view" />;
-            return <Col md={8}>
-              <GenreView genre={movies.find(m => m.Genre.Name === match.params.name).Genre} onClick={() => history.goBack()} />
+            return <Col>
+              <GenreView genre={movies.find(m => m.Genre.Name === match.params.Name).Genre} onClick={() => history.goBack()} />
             </Col>
           }
           } />
-        </Row>
+
+        </div>
       </Router>
     );
   }
