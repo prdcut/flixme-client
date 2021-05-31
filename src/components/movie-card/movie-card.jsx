@@ -2,11 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Card from 'react-bootstrap/Card';
-import CardColumns from 'react-bootstrap/CardDeck';
-import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+
 
 import { Link } from 'react-router-dom';
 
@@ -17,13 +13,13 @@ export class MovieCard extends React.Component {
     const { movie } = this.props;
 
     return (
-      <Card className="mb-4" border="warning">
+      <Card className="mb-4 p-2" bg="warning">
         <Card.Img variant="top" src={movie.ImagePath} alt="movie poster" />
-        <Card.Footer className="text-center">
-          <Link to={`/movies/${movie._id}`} className="text-warning">
-            <h4>{movie.Title}</h4>
+        <Card.Title className="text-center m-1">
+          <Link to={`/movies/${movie._id}`} className="text-info">
+            <h4 className="m-1">{movie.Title}</h4>
           </Link>
-        </Card.Footer>
+        </Card.Title>
       </Card>
     );
   }

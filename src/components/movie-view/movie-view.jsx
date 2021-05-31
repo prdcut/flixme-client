@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 
 import { Link } from 'react-router-dom';
 import { BrowserRouter as Router, Route } from "react-router-dom";
