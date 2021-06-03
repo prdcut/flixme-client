@@ -93,7 +93,7 @@ export class MainView extends React.Component {
                   <Link to={`/`}>
                     <Button variant="link" className="m-2 navbar-link text-warning">Login</Button>
                   </Link>
-                  <Link to={`/users`}>
+                  <Link to={`/register`}>
                     <Button variant="link" className="m-2 navbar-link text-warning">Register</Button>
                   </Link>
                 </div>
@@ -125,7 +125,7 @@ export class MainView extends React.Component {
               </Col>
             ))
           }} />
-          <Route path="/users" render={() => {
+          <Route path="/register" render={() => {
             if (user) return <Redirect to="/" />
             return <Col>
               <RegistrationView />
@@ -170,7 +170,7 @@ export class MainView extends React.Component {
             </Col>
             if (movies.length === 0) return <div className="main-view" />;
             return <Col>
-              <ProfileView />
+              <ProfileView movies={movies} />
             </Col>
           }} />
 

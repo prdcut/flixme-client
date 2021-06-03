@@ -6,8 +6,10 @@ import Row from 'react-bootstrap/Row';
 import Card from 'react-bootstrap/Card';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
+import FormControl from 'react-bootstrap/FormControl';
 
 import { Link } from 'react-router-dom';
 
@@ -160,105 +162,128 @@ export class ProfileView extends React.Component {
 
   render() {
     const { movies } = this.props;
+    console.log(this.props);
     const { UsernameInvalid, PasswordInvalid, EmailInvalid, BirthdateInvalid } = this.state;
     const FavoriteMovieList = movies.filter((movie) => {
       return this.state.FavoriteMovies.includes(movie._id);
     });
 
     return (
-      <div className="userProfile" style={{ display: "flex" }}>
-        <Container>
-          <Row className="justify-content-md-center">
-            <Col md={12}>
-              <Form className="justify-content-md-center mb-30">
-                <h1 style={{ textAlign: "center" }}>Profile Details</h1>
 
-                <Form.Group controlId="formUsername">
-                  <Form.Label>Username</Form.Label>
-                  <FormControl size="sm" type="text" name="Username" value={this.state.Username} onChange={(e) => this.handleChange(e)} placeholder="Change username" />
-                  {Object.keys(UsernameInvalid).map((key) => {
-                    return (
-                      <div key={key} style={{ color: "red" }}>
-                        {UsernameInvalid[key]}
-                      </div>
-                    );
-                  })}
 
-                </Form.Group>
-                <Form.Group controlId="formPassword">
-                  <Form.Label>Password</Form.Label>
-                  <FormControl size="sm" type="password" name="Password" value={this.state.Password} onChange={(e) => this.handleChange(e)} placeholder="Enter your password or Change password" />
-                  {Object.keys(PasswordInvalid).map((key) => {
-                    return (
-                      <div key={key} style={{ color: "red" }}>
-                        {PasswordInvalid[key]}
-                      </div>
-                    );
-                  })}
+      <Row className="justify-content-center">
 
-                </Form.Group>
-                <Form.Group controlId="formEmail">
-                  <Form.Label>Email</Form.Label>
-                  <FormControl size="sm" type="email" name="Email" value={this.state.Email} onChange={(e) => this.handleChange(e)} placeholder="Change Email" />
-                  {Object.keys(EmailInvalid).map((key) => {
-                    return (
-                      <div key={key} style={{ color: "red" }}>
-                        {EmailInvalid[key]}
-                      </div>
-                    );
-                  })}
+        <Col md={8}>
+          <Card className="p-3 mb-4" bg="dark" text="secondary">
+            <Row className="justify-content-md-center">
+              <Col md={9}>
+                <Form className="justify-content-md-center mb-30">
+                  <h2 className="text-info text-center m-3">Update Profile</h2>
 
-                </Form.Group>
-                <Form.Group controlId="formBirthdate">
-                  <Form.Label>Date of Birth </Form.Label>
-                  <FormControl size="sm" type="date" name="Birthdate" value={this.state.Birthdate} onChange={(e) => this.handleChange(e)} placeholder="Change Birthdate" />
-                  {Object.keys(BirthdateInvalid).map((key) => {
-                    return (
-                      <div key={key} style={{ color: "red" }}>
-                        {BirthdateInvalid[key]}
-                      </div>
-                    );
-                  })}
-
-                </Form.Group>
-
-                <Link to={`/users/${this.state.Username}`}>
-                  <Button className="mb-2" variant="dark" type="link" size="md" block onClick={(e) => this.handleUpdate(e)}>Save changes</Button>
-                </Link>
-
-                <Link to={`/`}>
-                  <Button className="mb-2" variant="primary" type="submit" size="md" block>Movies</Button>
-                </Link>
-
-                <Button className="mb-2" variant="danger" size="md" block onClick={() => this.handleDelete()}>Delete Account</Button>
-              </Form>
-
-              <div className="favoriteMovies" style={{ float: "center", textAlign: "center" }}>
-                <Card.Text className="mt-200" as='h3'>Favorite Movies</Card.Text>
-                <Row className='mb-20'>
-                  {FavoriteMovieList.map((movie) => {
-                    return (
-                      <Col md={3} key={movie._id}>
-                        <div key={movie._id}>
-                          <Card className='mb-20'>
-                            <Card.Img variant="top" src={movie.ImagePath} />
-                            <Card.Body>
-                              <Link to={`/movies/${movie._id}`}>
-                                <Card.Title as='h6'>{movie.Title}</Card.Title>
-                              </Link>
-                            </Card.Body>
-                          </Card>
-                          <Button className='mb-30' onClick={() => this.removeFavorite(movie)}>Remove</Button>
+                  <Form.Group controlId="formEmail">
+                    <Form.Label>
+                      Email
+                </Form.Label>
+                    <FormControl size="sm" type="email" name="Email" value={this.state.Email} onChange={(e) => this.handleChange(e)} placeholder="Change Email" />
+                    {Object.keys(EmailInvalid).map((key) => {
+                      return (
+                        <div key={key} style={{ color: "red" }}>
+                          {EmailInvalid[key]}
                         </div>
-                      </Col>
-                    );
-                  })}
-                </Row>
-              </div>
-            </Col>
-          </Row>
-        </Container>
-      </div >
+                      );
+                    })}
+
+                  </Form.Group>
+
+                  <Form.Group controlId="formUsername">
+                    <Form.Label>
+                      Username
+                </Form.Label>
+                    <FormControl size="sm" type="text" name="Username" value={this.state.Username} onChange={(e) => this.handleChange(e)} placeholder="Change username" />
+                    {Object.keys(UsernameInvalid).map((key) => {
+                      return (
+                        <div key={key} style={{ color: "red" }}>
+                          {UsernameInvalid[key]}
+                        </div>
+                      );
+                    })}
+
+                  </Form.Group>
+                  <Form.Group controlId="formPassword">
+                    <Form.Label>
+                      Password
+                </Form.Label>
+                    <FormControl size="sm" type="password" name="Password" value={this.state.Password} onChange={(e) => this.handleChange(e)} placeholder="Enter your password or Change password" />
+                    {Object.keys(PasswordInvalid).map((key) => {
+                      return (
+                        <div key={key} style={{ color: "red" }}>
+                          {PasswordInvalid[key]}
+                        </div>
+                      );
+                    })}
+
+                  </Form.Group>
+
+                  <Form.Group controlId="formBirthdate">
+                    <Form.Label>
+                      Date of Birth
+                </Form.Label>
+                    <FormControl size="sm" name="Birthdate" value={this.state.Birthdate} onChange={(e) => this.handleChange(e)} required type="date" />
+                    {Object.keys(BirthdateInvalid).map((key) => {
+                      return (
+                        <div key={key} style={{ color: "red" }}>
+                          {BirthdateInvalid[key]}
+                        </div>
+                      );
+                    })}
+
+                  </Form.Group>
+                  <Row className="p-2 justify-content-md-center">
+                    <Col md={8}>
+                      <Link to={`/users/${this.state.Username}`}>
+                        <Button variant="outline-info" type="submit" size="lg" block="md" onClick={(e) => this.handleUpdate(e)}>Save</Button>
+                      </Link>
+                    </Col>
+                  </Row>
+                  <Row className="p-2 justify-content-md-center">
+                    <Col md={8}>
+                      <Button variant="outline-danger" type="submit" size="lg" block="md" onClick={() => this.handleDelete()}>Delete Account</Button>
+                    </Col>
+                  </Row>
+                </Form>
+              </Col>
+            </Row>
+          </Card>
+          <Card className="p-3" bg="dark" text="secondary">
+
+            <h2 className="text-info text-center m-3">Favorite Movies</h2>
+            <Row className='mb-20'>
+              {FavoriteMovieList.map((movie) => {
+                return (
+                  <Col md={3} key={movie._id}>
+                    <div key={movie._id}>
+                      <Card className='mb-20'>
+                        <Card.Img variant="top" src={movie.ImagePath} />
+                        <Card.Body>
+                          <Link to={`/movies/${movie._id}`}>
+                            <Card.Title as='h6'>{movie.Title}</Card.Title>
+                          </Link>
+                        </Card.Body>
+                      </Card>
+                      <Button className='mb-30' onClick={() => this.removeFavorite(movie)}>Remove</Button>
+                    </div>
+                  </Col>
+                );
+              })}
+            </Row>
+
+          </Card>
+
+
+        </Col>
+
+      </Row >
+
     );
 
 
@@ -268,7 +293,7 @@ export class ProfileView extends React.Component {
 }
 
 ProfileView.propTypes = {
-  user: PropTypes.array.isRequired,
+  user: PropTypes.object.isRequired,
 };
 
 export default ProfileView;

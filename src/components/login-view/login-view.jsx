@@ -5,6 +5,8 @@ import axios from 'axios';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 
 import './login-view.scss';
 
@@ -28,26 +30,33 @@ export function LoginView(props) {
   };
 
   return (
-    <Card className="p-3" bg="warning" text="white">
-      <Form>
-        <h4 className="text-info text-center m-3">Log In</h4>
-        <Form.Group controlId="formUsername">
-          <Form.Label>
-            <b className="text-secondary">Username</b>
-          </Form.Label>
-          <Form.Control type="text" placeholder="Enter Username" value={username} onChange={(e) => setUsername(e.target.value)} />
-        </Form.Group>
+    <Row className="justify-content-md-center">
+      <Col md={8}>
+        <Card className="p-3" bg="dark" text="secondary">
+          <Row className="justify-content-md-center">
+            <Col md={9}>
+              <Form>
+                <h2 className="text-info text-center m-3">Log In</h2>
+                <Form.Group controlId="formUsername">
+                  <Form.Label>Username</Form.Label>
+                  <Form.Control type="text" placeholder="Enter Username" value={username} onChange={(e) => setUsername(e.target.value)} />
+                </Form.Group>
 
-        <Form.Group controlId="formPassword">
-          <Form.Label>
-            <b className="text-secondary">Password</b>
-          </Form.Label>
-          <Form.Control type="password" placeholder="Enter Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-        </Form.Group>
-
-        <Button variant="dark" className="text-info" type="submit" size="lg" block="md" onClick={handleSubmit}>Submit</Button>
-      </Form>
-    </Card>
+                <Form.Group controlId="formPassword">
+                  <Form.Label>Password</Form.Label>
+                  <Form.Control type="password" placeholder="Enter Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                </Form.Group>
+                <Row className="p-2 justify-content-md-center">
+                  <Col md={8}>
+                    <Button variant="outline-info" type="submit" size="lg" block="md" onClick={handleSubmit}>Log In</Button>
+                  </Col>
+                </Row>
+              </Form>
+            </Col>
+          </Row>
+        </Card>
+      </Col>
+    </Row>
   );
 }
 

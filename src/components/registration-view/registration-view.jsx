@@ -4,8 +4,9 @@ import axios from 'axios';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-
-
+import Card from 'react-bootstrap/Card';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 
 export function RegistrationView(props) {
   const [username, setUsername] = useState('');
@@ -32,41 +33,47 @@ export function RegistrationView(props) {
   };
 
   return (
-    <Form>
+    <Row className="justify-content-md-center">
+      <Col md={8}>
+        <Card className="p-3" bg="dark" text="secondary">
+          <Row className="justify-content-md-center">
+            <Col md={9}>
+              <Form>
 
-      <h2>Sing Up</h2>
+                <h2 className="text-info text-center m-3">Sing Up</h2>
 
-      <Form.Group controlId="formEmail">
-        <Form.Label>
-          <b>Email</b>
-        </Form.Label>
-        <Form.Control required type="email" placeholder="Enter Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-      </Form.Group>
+                <Form.Group controlId="formEmail">
+                  <Form.Label>Email</Form.Label>
+                  <Form.Control required type="email" placeholder="Enter Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                </Form.Group>
 
-      <Form.Group controlId="formUsername">
-        <Form.Label>
-          <b>Username</b>
-        </Form.Label>
-        <Form.Control required minlenght="5" maxlenght="360" type="text" placeholder="Enter Username" value={username} onChange={(e) => setUsername(e.target.value)} />
-      </Form.Group>
+                <Form.Group controlId="formUsername">
+                  <Form.Label>Username</Form.Label>
+                  <Form.Control required minlenght="5" maxlenght="360" type="text" placeholder="Enter Username" value={username} onChange={(e) => setUsername(e.target.value)} />
+                </Form.Group>
 
-      <Form.Group controlId="formPassword">
-        <Form.Label>
-          <b>Password</b>
-        </Form.Label>
-        <Form.Control required minlenght="5" maxlenght="50" type="password" placeholder="Enter Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-      </Form.Group>
+                <Form.Group controlId="formPassword">
+                  <Form.Label>Password</Form.Label>
+                  <Form.Control required minlenght="5" maxlenght="50" type="password" placeholder="Enter Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                </Form.Group>
 
-      <Form.Group controlId="formBirthdate">
-        <Form.Label>
-          <b>Birthdate</b>
-        </Form.Label>
-        <Form.Control required type="date" placeholder="Date of Birth" value={birthdate} onChange={(e) => setBirthdate(e.target.value)} />
-      </Form.Group>
+                <Form.Group controlId="formBirthdate">
+                  <Form.Label>Date of Birth</Form.Label>
+                  <Form.Control required type="date" placeholder="Date of Birth" value={birthdate} onChange={(e) => setBirthdate(e.target.value)} />
+                </Form.Group>
 
-      <Button variant="warning" type="submit" size="lg" block type="submit" onClick={handleSubmit}>Sign Up</Button>
+                <Row className="p-2 justify-content-md-center">
+                  <Col md={8}>
+                    <Button variant="outline-info" lassName="text-info" type="submit" size="lg" block="md" onClick={handleSubmit}>Sing Up</Button>
+                  </Col>
+                </Row>
 
-    </Form>
+              </Form>
+            </Col>
+          </Row>
+        </Card>
+      </Col>
+    </Row>
   );
 };
 
