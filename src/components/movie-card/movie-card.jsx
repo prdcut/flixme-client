@@ -24,6 +24,7 @@ export class MovieCard extends React.Component {
               <Link to={`/movies/${movie._id}`} className="text-info">
                 <h4 className="m-1">{movie.Title}</h4>
               </Link>
+            </Card.Title>
           </Card>
         </Col>
       </Row>
