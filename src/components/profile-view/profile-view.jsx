@@ -72,7 +72,7 @@ export class ProfileView extends React.Component {
       });
   }
 
-  handleDeregister() {
+  handleDelete() {
     const token = localStorage.getItem("token");
     const user = localStorage.getItem("user");
 
