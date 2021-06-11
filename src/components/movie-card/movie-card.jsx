@@ -16,18 +16,16 @@ export class MovieCard extends React.Component {
     const { movie } = this.props;
 
     return (
-      <Row className="justify-content-md-center">
-        <Col md={6}>
-          <Card className="mb-4 p-2" bg="dark">
-            <Card.Img variant="top" src={movie.ImagePath} alt="movie poster" />
-            <Card.Title className="text-center m-1">
-              <Link to={`/movies/${movie._id}`} className="text-info">
-                <h4 className="m-1">{movie.Title}</h4>
-              </Link>
-            </Card.Title>
-          </Card>
-        </Col>
-      </Row>
+
+      <Card className="mb-3 p-2" bg="dark" >
+        <Card.Img variant="top" src={movie.ImagePath} alt="movie poster" />
+        <Card.Title className="text-center m-1">
+          <Link to={`/movies/${movie._id}`} className="text-info">
+            <h4 className="m-1">{movie.Title}</h4>
+          </Link>
+        </Card.Title>
+      </Card>
+
     );
   }
 }

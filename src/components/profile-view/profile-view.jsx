@@ -72,7 +72,8 @@ export class ProfileView extends React.Component {
       });
   }
 
-  handleDelete() {
+  handleDelete(e) {
+    e.preventDefault();
     const token = localStorage.getItem("token");
     const user = localStorage.getItem("user");
 
@@ -80,10 +81,12 @@ export class ProfileView extends React.Component {
       headers: { Authotization: `Bearer ${token}` },
     })
       .then(() => {
-        alter(user + " has been deleted.");
         localStorage.removeItem("user");
         localStorage.removeItem("token");
-        window.location.pathname = "/";
+        window.open('/login', '_self');
+      })
+      .then(() => {
+        alter(user + " has been deleted.");
       })
       .catch(function (error) {
         console.log(error);
@@ -133,7 +136,7 @@ export class ProfileView extends React.Component {
       isValid = false;
     }
     if (this.state.Password.trim().length < 5) {
-      PasswordError.passwordShort = "Must contain at least 5 characters.";
+      PasswordInvalid.passwordShort = "Must contain at least 5 characters.";
       isValid = false;
     }
     if (!(this.state.Email && this.state.Email.includes(".") && this.state.Email.includes("@"))) {
@@ -292,8 +295,6 @@ export class ProfileView extends React.Component {
   }
 }
 
-ProfileView.propTypes = {
-  user: PropTypes.object.isRequired,
-};
+
 
 export default ProfileView;

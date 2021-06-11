@@ -26825,7 +26825,7 @@ function LoginView(props) {
         },
         __self: this
     }, /*#__PURE__*/ _reactDefault.default.createElement(_colDefault.default, {
-        md: 8,
+        md: 6,
         __source: {
             fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/login-view/login-view.jsx",
             lineNumber: 50
@@ -28815,7 +28815,7 @@ class MovieView extends _reactDefault.default.Component {
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_colDefault.default, {
-            md: 8,
+            md: 4,
             __source: {
                 fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/movie-view/movie-view.jsx",
                 lineNumber: 51
@@ -28970,7 +28970,7 @@ class DirectorView extends _reactDefault.default.Component {
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_colDefault.default, {
-            md: 8,
+            md: 4,
             __source: {
                 fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/director-view/director-view.jsx",
                 lineNumber: 37
@@ -29102,7 +29102,7 @@ class GenreView extends _reactDefault.default.Component {
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_colDefault.default, {
-            md: 8,
+            md: 4,
             __source: {
                 fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/genre-view/genre-view.jsx",
                 lineNumber: 34
@@ -29154,6 +29154,8 @@ var _propTypes = require("prop-types");
 var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
 var _axios = require("axios");
 var _axiosDefault = parcelHelpers.interopDefault(_axios);
+var _reactDom = require("react-dom");
+var _reactDomDefault = parcelHelpers.interopDefault(_reactDom);
 var _form = require("react-bootstrap/Form");
 var _formDefault = parcelHelpers.interopDefault(_form);
 var _button = require("react-bootstrap/Button");
@@ -29171,9 +29173,28 @@ function RegistrationView(props) {
     const [password, setPassword] = _react.useState('');
     const [email, setEmail] = _react.useState('');
     const [birthdate, setBirthdate] = _react.useState('');
+    const formValidation = (formData)=>{
+        let isValid = 'valid';
+        if (formData.Username.length < 5) isValid = 'Username must be at least 5 characters long';
+        if (formData.Password === '') isValid = 'Password can not be empty.';
+        if (formData.Email.includes('.') === false || formData.Email.includes('@') === false) isValid = 'Please enter a valid Email address';
+        if (formData.Birthdate === '') isValid = 'Date of birth can not be empty.';
+        return isValid;
+    };
     const handleSubmit = (e)=>{
         e.preventDefault();
-        _axiosDefault.default.post('https://flixmebackend.herokuapp.com/users', {
+        const formData = {
+        };
+        formData.Username = username;
+        formData.Password = password;
+        formData.Email = email;
+        formData.Birthdate = birthdate;
+        let isValid = formValidation(formData);
+        if (isValid !== 'valid') {
+            alert(isValid);
+            return;
+        }
+        if (isValid === 'valid') _axiosDefault.default.post('https://flixmebackend.herokuapp.com/users', {
             Username: username,
             Password: password,
             Email: email,
@@ -29190,14 +29211,14 @@ function RegistrationView(props) {
         className: "justify-content-md-center",
         __source: {
             fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/registration-view/registration-view.jsx",
-            lineNumber: 36
+            lineNumber: 62
         },
         __self: this
     }, /*#__PURE__*/ _reactDefault.default.createElement(_colDefault.default, {
         md: 8,
         __source: {
             fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/registration-view/registration-view.jsx",
-            lineNumber: 37
+            lineNumber: 63
         },
         __self: this
     }, /*#__PURE__*/ _reactDefault.default.createElement(_cardDefault.default, {
@@ -29206,164 +29227,170 @@ function RegistrationView(props) {
         text: "secondary",
         __source: {
             fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/registration-view/registration-view.jsx",
-            lineNumber: 38
+            lineNumber: 64
         },
         __self: this
     }, /*#__PURE__*/ _reactDefault.default.createElement(_rowDefault.default, {
         className: "justify-content-md-center",
         __source: {
             fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/registration-view/registration-view.jsx",
-            lineNumber: 39
+            lineNumber: 65
         },
         __self: this
     }, /*#__PURE__*/ _reactDefault.default.createElement(_colDefault.default, {
         md: 9,
         __source: {
             fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/registration-view/registration-view.jsx",
-            lineNumber: 40
+            lineNumber: 66
         },
         __self: this
     }, /*#__PURE__*/ _reactDefault.default.createElement(_formDefault.default, {
+        noValidate: true,
         __source: {
             fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/registration-view/registration-view.jsx",
-            lineNumber: 41
+            lineNumber: 67
         },
         __self: this
     }, /*#__PURE__*/ _reactDefault.default.createElement("h2", {
         className: "text-info text-center m-3",
         __source: {
             fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/registration-view/registration-view.jsx",
-            lineNumber: 43
+            lineNumber: 69
         },
         __self: this
     }, "Sing Up"), /*#__PURE__*/ _reactDefault.default.createElement(_formDefault.default.Group, {
         controlId: "formEmail",
         __source: {
             fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/registration-view/registration-view.jsx",
-            lineNumber: 45
+            lineNumber: 71
         },
         __self: this
     }, /*#__PURE__*/ _reactDefault.default.createElement(_formDefault.default.Label, {
         __source: {
             fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/registration-view/registration-view.jsx",
-            lineNumber: 46
+            lineNumber: 72
         },
         __self: this
     }, "Email"), /*#__PURE__*/ _reactDefault.default.createElement(_formDefault.default.Control, {
-        required: true,
         type: "email",
+        name: "email",
         placeholder: "Enter Email",
+        required: true,
         value: email,
         onChange: (e)=>setEmail(e.target.value)
         ,
         __source: {
             fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/registration-view/registration-view.jsx",
-            lineNumber: 47
+            lineNumber: 73
         },
         __self: this
     })), /*#__PURE__*/ _reactDefault.default.createElement(_formDefault.default.Group, {
         controlId: "formUsername",
         __source: {
             fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/registration-view/registration-view.jsx",
-            lineNumber: 50
+            lineNumber: 83
         },
         __self: this
     }, /*#__PURE__*/ _reactDefault.default.createElement(_formDefault.default.Label, {
         __source: {
             fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/registration-view/registration-view.jsx",
-            lineNumber: 51
+            lineNumber: 84
         },
         __self: this
     }, "Username"), /*#__PURE__*/ _reactDefault.default.createElement(_formDefault.default.Control, {
-        required: true,
-        minlenght: "5",
-        maxlenght: "360",
         type: "text",
+        name: "username",
         placeholder: "Enter Username",
+        required: true,
         value: username,
         onChange: (e)=>setUsername(e.target.value)
         ,
+        minlenght: "5",
+        maxlenght: "360",
         __source: {
             fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/registration-view/registration-view.jsx",
-            lineNumber: 52
+            lineNumber: 85
         },
         __self: this
     })), /*#__PURE__*/ _reactDefault.default.createElement(_formDefault.default.Group, {
         controlId: "formPassword",
         __source: {
             fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/registration-view/registration-view.jsx",
-            lineNumber: 55
+            lineNumber: 97
         },
         __self: this
     }, /*#__PURE__*/ _reactDefault.default.createElement(_formDefault.default.Label, {
         __source: {
             fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/registration-view/registration-view.jsx",
-            lineNumber: 56
+            lineNumber: 98
         },
         __self: this
     }, "Password"), /*#__PURE__*/ _reactDefault.default.createElement(_formDefault.default.Control, {
-        required: true,
-        minlenght: "5",
-        maxlenght: "50",
         type: "password",
+        name: "password",
         placeholder: "Enter Password",
+        required: true,
         value: password,
         onChange: (e)=>setPassword(e.target.value)
         ,
+        required: true,
+        minlenght: "5",
+        maxlenght: "50",
         __source: {
             fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/registration-view/registration-view.jsx",
-            lineNumber: 57
+            lineNumber: 99
         },
         __self: this
     })), /*#__PURE__*/ _reactDefault.default.createElement(_formDefault.default.Group, {
         controlId: "formBirthdate",
         __source: {
             fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/registration-view/registration-view.jsx",
-            lineNumber: 60
+            lineNumber: 111
         },
         __self: this
     }, /*#__PURE__*/ _reactDefault.default.createElement(_formDefault.default.Label, {
         __source: {
             fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/registration-view/registration-view.jsx",
-            lineNumber: 61
+            lineNumber: 112
         },
         __self: this
     }, "Date of Birth"), /*#__PURE__*/ _reactDefault.default.createElement(_formDefault.default.Control, {
-        required: true,
         type: "date",
+        name: "birthdate",
         placeholder: "Date of Birth",
+        required: true,
         value: birthdate,
         onChange: (e)=>setBirthdate(e.target.value)
         ,
         __source: {
             fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/registration-view/registration-view.jsx",
-            lineNumber: 62
+            lineNumber: 113
         },
         __self: this
     })), /*#__PURE__*/ _reactDefault.default.createElement(_rowDefault.default, {
         className: "p-2 justify-content-md-center",
         __source: {
             fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/registration-view/registration-view.jsx",
-            lineNumber: 65
+            lineNumber: 123
         },
         __self: this
     }, /*#__PURE__*/ _reactDefault.default.createElement(_colDefault.default, {
-        md: 8,
+        md: 6,
         __source: {
             fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/registration-view/registration-view.jsx",
-            lineNumber: 66
+            lineNumber: 124
         },
         __self: this
     }, /*#__PURE__*/ _reactDefault.default.createElement(_buttonDefault.default, {
         variant: "outline-info",
-        lassName: "text-info",
+        className: "text-info",
         type: "submit",
         size: "lg",
         block: "md",
         onClick: handleSubmit,
         __source: {
             fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/registration-view/registration-view.jsx",
-            lineNumber: 67
+            lineNumber: 125
         },
         __self: this
     }, "Sing Up"))))))))));
@@ -29386,7 +29413,7 @@ $RefreshReg$(_c, "RegistrationView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react":"3b2NM","prop-types":"4dfy5","axios":"7rA65","react-bootstrap/Form":"6A5ko","react-bootstrap/Button":"1ru0l","@parcel/transformer-js/src/esmodule-helpers.js":"367CR","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f","react-bootstrap/Card":"1CZWQ","react-bootstrap/Col":"2D0r8","react-bootstrap/Row":"3fzwD"}],"4IYnz":[function() {},{}],"3qLFd":[function(require,module,exports) {
+},{"react":"3b2NM","prop-types":"4dfy5","react-bootstrap/Form":"6A5ko","react-bootstrap/Button":"1ru0l","@parcel/transformer-js/src/esmodule-helpers.js":"367CR","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f","react-bootstrap/Col":"2D0r8","axios":"7rA65","react-dom":"2sg1U","react-bootstrap/Card":"1CZWQ","react-bootstrap/Row":"3fzwD"}],"4IYnz":[function() {},{}],"3qLFd":[function(require,module,exports) {
 "use strict";
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
@@ -31792,7 +31819,8 @@ class ProfileView extends _reactDefault.default.Component {
             alert(movie.Title + "has been removed from your favorite list.");
         });
     }
-    handleDelete() {
+    handleDelete(e) {
+        e.preventDefault();
         const token = localStorage.getItem("token");
         const user = localStorage.getItem("user");
         _axiosDefault.default.delete(`https://flixmebackend.herokuapp.com/users/${user}`, {
@@ -31800,10 +31828,11 @@ class ProfileView extends _reactDefault.default.Component {
                 Authotization: `Bearer ${token}`
             }
         }).then(()=>{
-            alter(user + " has been deleted.");
             localStorage.removeItem("user");
             localStorage.removeItem("token");
-            window.location.pathname = "/";
+            window.open('/login', '_self');
+        }).then(()=>{
+            alter(user + " has been deleted.");
         }).catch(function(error) {
             console.log(error);
         });
@@ -31851,7 +31880,7 @@ class ProfileView extends _reactDefault.default.Component {
             isValid = false;
         }
         if (this.state.Password.trim().length < 5) {
-            PasswordError.passwordShort = "Must contain at least 5 characters.";
+            PasswordInvalid.passwordShort = "Must contain at least 5 characters.";
             isValid = false;
         }
         if (!(this.state.Email && this.state.Email.includes(".") && this.state.Email.includes("@"))) {
@@ -31887,14 +31916,14 @@ class ProfileView extends _reactDefault.default.Component {
             className: "justify-content-center",
             __source: {
                 fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 174
+                lineNumber: 177
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_colDefault.default, {
             md: 8,
             __source: {
                 fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 176
+                lineNumber: 179
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_cardDefault.default, {
@@ -31903,48 +31932,48 @@ class ProfileView extends _reactDefault.default.Component {
             text: "secondary",
             __source: {
                 fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 177
+                lineNumber: 180
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_rowDefault.default, {
             className: "justify-content-md-center",
             __source: {
                 fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 178
+                lineNumber: 181
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_colDefault.default, {
             md: 9,
             __source: {
                 fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 179
+                lineNumber: 182
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_formDefault.default, {
             className: "justify-content-md-center mb-30",
             __source: {
                 fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 180
+                lineNumber: 183
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement("h2", {
             className: "text-info text-center m-3",
             __source: {
                 fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 181
+                lineNumber: 184
             },
             __self: this
         }, "Update Profile"), /*#__PURE__*/ _reactDefault.default.createElement(_formDefault.default.Group, {
             controlId: "formEmail",
             __source: {
                 fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 183
+                lineNumber: 186
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_formDefault.default.Label, {
             __source: {
                 fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 184
+                lineNumber: 187
             },
             __self: this
         }, "Email"), /*#__PURE__*/ _reactDefault.default.createElement(_formControlDefault.default, {
@@ -31957,7 +31986,7 @@ class ProfileView extends _reactDefault.default.Component {
             placeholder: "Change Email",
             __source: {
                 fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 187
+                lineNumber: 190
             },
             __self: this
         }), Object.keys(EmailInvalid).map((key)=>{
@@ -31968,7 +31997,7 @@ class ProfileView extends _reactDefault.default.Component {
                 },
                 __source: {
                     fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/profile-view/profile-view.jsx",
-                    lineNumber: 190
+                    lineNumber: 193
                 },
                 __self: this
             }, EmailInvalid[key]));
@@ -31976,13 +32005,13 @@ class ProfileView extends _reactDefault.default.Component {
             controlId: "formUsername",
             __source: {
                 fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 198
+                lineNumber: 201
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_formDefault.default.Label, {
             __source: {
                 fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 199
+                lineNumber: 202
             },
             __self: this
         }, "Username"), /*#__PURE__*/ _reactDefault.default.createElement(_formControlDefault.default, {
@@ -31995,7 +32024,7 @@ class ProfileView extends _reactDefault.default.Component {
             placeholder: "Change username",
             __source: {
                 fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 202
+                lineNumber: 205
             },
             __self: this
         }), Object.keys(UsernameInvalid).map((key)=>{
@@ -32006,7 +32035,7 @@ class ProfileView extends _reactDefault.default.Component {
                 },
                 __source: {
                     fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/profile-view/profile-view.jsx",
-                    lineNumber: 205
+                    lineNumber: 208
                 },
                 __self: this
             }, UsernameInvalid[key]));
@@ -32014,13 +32043,13 @@ class ProfileView extends _reactDefault.default.Component {
             controlId: "formPassword",
             __source: {
                 fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 212
+                lineNumber: 215
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_formDefault.default.Label, {
             __source: {
                 fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 213
+                lineNumber: 216
             },
             __self: this
         }, "Password"), /*#__PURE__*/ _reactDefault.default.createElement(_formControlDefault.default, {
@@ -32033,7 +32062,7 @@ class ProfileView extends _reactDefault.default.Component {
             placeholder: "Enter your password or Change password",
             __source: {
                 fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 216
+                lineNumber: 219
             },
             __self: this
         }), Object.keys(PasswordInvalid).map((key)=>{
@@ -32044,7 +32073,7 @@ class ProfileView extends _reactDefault.default.Component {
                 },
                 __source: {
                     fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/profile-view/profile-view.jsx",
-                    lineNumber: 219
+                    lineNumber: 222
                 },
                 __self: this
             }, PasswordInvalid[key]));
@@ -32052,13 +32081,13 @@ class ProfileView extends _reactDefault.default.Component {
             controlId: "formBirthdate",
             __source: {
                 fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 227
+                lineNumber: 230
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_formDefault.default.Label, {
             __source: {
                 fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 228
+                lineNumber: 231
             },
             __self: this
         }, "Date of Birth"), /*#__PURE__*/ _reactDefault.default.createElement(_formControlDefault.default, {
@@ -32071,7 +32100,7 @@ class ProfileView extends _reactDefault.default.Component {
             type: "date",
             __source: {
                 fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 231
+                lineNumber: 234
             },
             __self: this
         }), Object.keys(BirthdateInvalid).map((key)=>{
@@ -32082,7 +32111,7 @@ class ProfileView extends _reactDefault.default.Component {
                 },
                 __source: {
                     fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/profile-view/profile-view.jsx",
-                    lineNumber: 234
+                    lineNumber: 237
                 },
                 __self: this
             }, BirthdateInvalid[key]));
@@ -32090,21 +32119,21 @@ class ProfileView extends _reactDefault.default.Component {
             className: "p-2 justify-content-md-center",
             __source: {
                 fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 241
+                lineNumber: 244
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_colDefault.default, {
             md: 8,
             __source: {
                 fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 242
+                lineNumber: 245
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Link, {
             to: `/users/${this.state.Username}`,
             __source: {
                 fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 243
+                lineNumber: 246
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_buttonDefault.default, {
@@ -32116,21 +32145,21 @@ class ProfileView extends _reactDefault.default.Component {
             ,
             __source: {
                 fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 244
+                lineNumber: 247
             },
             __self: this
         }, "Save")))), /*#__PURE__*/ _reactDefault.default.createElement(_rowDefault.default, {
             className: "p-2 justify-content-md-center",
             __source: {
                 fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 248
+                lineNumber: 251
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_colDefault.default, {
             md: 8,
             __source: {
                 fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 249
+                lineNumber: 252
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_buttonDefault.default, {
@@ -32142,7 +32171,7 @@ class ProfileView extends _reactDefault.default.Component {
             ,
             __source: {
                 fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 250
+                lineNumber: 253
             },
             __self: this
         }, "Delete Account"))))))), /*#__PURE__*/ _reactDefault.default.createElement(_cardDefault.default, {
@@ -32151,21 +32180,21 @@ class ProfileView extends _reactDefault.default.Component {
             text: "secondary",
             __source: {
                 fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 257
+                lineNumber: 260
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement("h2", {
             className: "text-info text-center m-3",
             __source: {
                 fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 259
+                lineNumber: 262
             },
             __self: this
         }, "Favorite Movies"), /*#__PURE__*/ _reactDefault.default.createElement(_rowDefault.default, {
             className: "mb-20",
             __source: {
                 fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 260
+                lineNumber: 263
             },
             __self: this
         }, FavoriteMovieList.map((movie)=>{
@@ -32174,21 +32203,21 @@ class ProfileView extends _reactDefault.default.Component {
                 key: movie._id,
                 __source: {
                     fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/profile-view/profile-view.jsx",
-                    lineNumber: 263
+                    lineNumber: 266
                 },
                 __self: this
             }, /*#__PURE__*/ _reactDefault.default.createElement("div", {
                 key: movie._id,
                 __source: {
                     fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/profile-view/profile-view.jsx",
-                    lineNumber: 264
+                    lineNumber: 267
                 },
                 __self: this
             }, /*#__PURE__*/ _reactDefault.default.createElement(_cardDefault.default, {
                 className: "mb-20",
                 __source: {
                     fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/profile-view/profile-view.jsx",
-                    lineNumber: 265
+                    lineNumber: 268
                 },
                 __self: this
             }, /*#__PURE__*/ _reactDefault.default.createElement(_cardDefault.default.Img, {
@@ -32196,27 +32225,27 @@ class ProfileView extends _reactDefault.default.Component {
                 src: movie.ImagePath,
                 __source: {
                     fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/profile-view/profile-view.jsx",
-                    lineNumber: 266
+                    lineNumber: 269
                 },
                 __self: this
             }), /*#__PURE__*/ _reactDefault.default.createElement(_cardDefault.default.Body, {
                 __source: {
                     fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/profile-view/profile-view.jsx",
-                    lineNumber: 267
+                    lineNumber: 270
                 },
                 __self: this
             }, /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Link, {
                 to: `/movies/${movie._id}`,
                 __source: {
                     fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/profile-view/profile-view.jsx",
-                    lineNumber: 268
+                    lineNumber: 271
                 },
                 __self: this
             }, /*#__PURE__*/ _reactDefault.default.createElement(_cardDefault.default.Title, {
                 as: "h6",
                 __source: {
                     fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/profile-view/profile-view.jsx",
-                    lineNumber: 269
+                    lineNumber: 272
                 },
                 __self: this
             }, movie.Title)))), /*#__PURE__*/ _reactDefault.default.createElement(_buttonDefault.default, {
@@ -32225,16 +32254,13 @@ class ProfileView extends _reactDefault.default.Component {
                 ,
                 __source: {
                     fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/profile-view/profile-view.jsx",
-                    lineNumber: 273
+                    lineNumber: 276
                 },
                 __self: this
             }, "Remove"))));
         }))))));
     }
 }
-ProfileView.propTypes = {
-    user: _propTypesDefault.default.object.isRequired
-};
 exports.default = ProfileView;
 
   helpers.postlude(module);
@@ -33620,6 +33646,8 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
+var _row = require("react-bootstrap/Row");
+var _rowDefault = parcelHelpers.interopDefault(_row);
 var _col = require("react-bootstrap/Col");
 var _colDefault = parcelHelpers.interopDefault(_col);
 var _reactRedux = require("react-redux");
@@ -33641,40 +33669,45 @@ function MoviesList(props) {
         className: "main-view",
         __source: {
             fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/movies-list/movies-list.jsx",
-            lineNumber: 20
+            lineNumber: 21
         },
         __self: this
     }));
-    return(/*#__PURE__*/ _reactDefault.default.createElement(_reactDefault.default.Fragment, null, /*#__PURE__*/ _reactDefault.default.createElement(_colDefault.default, {
-        md: 12,
-        style: {
-            margin: '1em'
-        },
+    return(/*#__PURE__*/ _reactDefault.default.createElement(_rowDefault.default, {
+        className: "justify-content-md-center",
         __source: {
             fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/movies-list/movies-list.jsx",
             lineNumber: 23
+        },
+        __self: this
+    }, /*#__PURE__*/ _reactDefault.default.createElement(_colDefault.default, {
+        md: 12,
+        className: "mb-5",
+        __source: {
+            fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/movies-list/movies-list.jsx",
+            lineNumber: 24
         },
         __self: this
     }, /*#__PURE__*/ _reactDefault.default.createElement(_visibilityFilterInputDefault.default, {
         visibilityFilter: visibilityFilter,
         __source: {
             fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/movies-list/movies-list.jsx",
-            lineNumber: 24
+            lineNumber: 25
         },
         __self: this
     })), filteredMovies.map((m)=>/*#__PURE__*/ _reactDefault.default.createElement(_colDefault.default, {
-            md: 3,
+            md: 4,
             key: m._id,
             __source: {
                 fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/movies-list/movies-list.jsx",
-                lineNumber: 27
+                lineNumber: 28
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_movieCard.MovieCard, {
             movie: m,
             __source: {
                 fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/movies-list/movies-list.jsx",
-                lineNumber: 28
+                lineNumber: 29
             },
             __self: this
         }))
@@ -33690,7 +33723,7 @@ $RefreshReg$(_c, "MoviesList");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react":"3b2NM","react-bootstrap/Col":"2D0r8","react-redux":"7GDa4","../visibility-filter-input/visibility-filter-input":"5DnyA","../movie-card/movie-card":"4fXuG","@parcel/transformer-js/src/esmodule-helpers.js":"367CR","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f"}],"5DnyA":[function(require,module,exports) {
+},{"react":"3b2NM","react-bootstrap/Col":"2D0r8","react-redux":"7GDa4","../visibility-filter-input/visibility-filter-input":"5DnyA","../movie-card/movie-card":"4fXuG","@parcel/transformer-js/src/esmodule-helpers.js":"367CR","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f","react-bootstrap/Row":"3fzwD"}],"5DnyA":[function(require,module,exports) {
 var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -33710,7 +33743,7 @@ function VisibilityFilterInput(props) {
         onChange: (e)=>props.setFilter(e.target.value)
         ,
         value: props.visibilityFilter,
-        placeholder: "filter",
+        placeholder: "Search",
         __source: {
             fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/visibility-filter-input/visibility-filter-input.jsx",
             lineNumber: 9
@@ -33758,26 +33791,12 @@ var _movieCardScss = require("./movie-card.scss");
 class MovieCard extends _reactDefault.default.Component {
     render() {
         const { movie  } = this.props;
-        return(/*#__PURE__*/ _reactDefault.default.createElement(_rowDefault.default, {
-            className: "justify-content-md-center",
-            __source: {
-                fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/movie-card/movie-card.jsx",
-                lineNumber: 19
-            },
-            __self: this
-        }, /*#__PURE__*/ _reactDefault.default.createElement(_colDefault.default, {
-            md: 6,
-            __source: {
-                fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/movie-card/movie-card.jsx",
-                lineNumber: 20
-            },
-            __self: this
-        }, /*#__PURE__*/ _reactDefault.default.createElement(_cardDefault.default, {
-            className: "mb-4 p-2",
+        return(/*#__PURE__*/ _reactDefault.default.createElement(_cardDefault.default, {
+            className: "mb-3 p-2",
             bg: "dark",
             __source: {
                 fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/movie-card/movie-card.jsx",
-                lineNumber: 21
+                lineNumber: 20
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_cardDefault.default.Img, {
@@ -33786,14 +33805,14 @@ class MovieCard extends _reactDefault.default.Component {
             alt: "movie poster",
             __source: {
                 fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/movie-card/movie-card.jsx",
-                lineNumber: 22
+                lineNumber: 21
             },
             __self: this
         }), /*#__PURE__*/ _reactDefault.default.createElement(_cardDefault.default.Title, {
             className: "text-center m-1",
             __source: {
                 fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/movie-card/movie-card.jsx",
-                lineNumber: 23
+                lineNumber: 22
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Link, {
@@ -33801,17 +33820,17 @@ class MovieCard extends _reactDefault.default.Component {
             className: "text-info",
             __source: {
                 fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/movie-card/movie-card.jsx",
-                lineNumber: 24
+                lineNumber: 23
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement("h4", {
             className: "m-1",
             __source: {
                 fileName: "/Users/felipo/Documents/WebDev/flixme-client/src/components/movie-card/movie-card.jsx",
-                lineNumber: 25
+                lineNumber: 24
             },
             __self: this
-        }, movie.Title)))))));
+        }, movie.Title)))));
     }
 }
 MovieCard.propTypes = {

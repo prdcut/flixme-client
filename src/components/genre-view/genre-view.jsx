@@ -31,7 +31,7 @@ export class GenreView extends React.Component {
               <Card.Subtitle className="mb-2 text-muted">Description</Card.Subtitle>
               <Card.Text>{genre.Description}</Card.Text>
               <Row className="justify-content-md-center">
-                <Col md={8}>
+                <Col md={4}>
                   <Button onClick={() => { onClick(); }} variant="outline-info" className="text-info" block>Back</Button>
                 </Col>
               </Row>

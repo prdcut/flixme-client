@@ -47,7 +47,7 @@ export function LoginView(props) {
                   <Form.Control type="password" placeholder="Enter Password" value={password} onChange={(e) => setPassword(e.target.value)} />
                 </Form.Group>
                 <Row className="p-2 justify-content-md-center">
-                  <Col md={8}>
+                  <Col md={6}>
                     <Button variant="outline-info" type="submit" size="lg" block="md" onClick={handleSubmit}>Log In</Button>
                   </Col>
                 </Row>

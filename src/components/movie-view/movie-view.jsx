@@ -48,7 +48,7 @@ export class MovieView extends React.Component {
                 </Link>
               </Card.Text>
               <Row className="justify-content-md-center">
-                <Col md={8}>
+                <Col md={4}>
                   <Button onClick={() => { onClick(); }} variant="outline-info" className="text-info" block>Back</Button>
                 </Col>
               </Row>
