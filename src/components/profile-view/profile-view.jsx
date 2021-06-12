@@ -4,7 +4,6 @@ import axios from "axios";
 
 import Row from 'react-bootstrap/Row';
 import Card from 'react-bootstrap/Card';
-import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Form from 'react-bootstrap/Form';
@@ -12,6 +11,8 @@ import Col from 'react-bootstrap/Col';
 import FormControl from 'react-bootstrap/FormControl';
 
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { setUser } from '../../actions/actions';
 
 
 export class ProfileView extends React.Component {
@@ -54,38 +55,23 @@ export class ProfileView extends React.Component {
       });
   }
 
-  removeFavorite(movie) {
-    const token = localStorage.getItem("token");
-    const url =
-      `https://flixmebackend.herokuapp.com/users/${user}` +
-      localStorage.getItem("user") +
-      "/favorites/" +
-      movie._id;
-
-    axios.delete(url, {
-      headers: { Authotization: `Bearer ${token}` },
-    })
-      .then((response) => {
-        console.log(response);
-        this.componentDidMount();
-        alert(movie.Title + "has been removed from your favorite list.")
-      });
-  }
-
   handleDelete(e) {
     e.preventDefault();
     const token = localStorage.getItem("token");
     const user = localStorage.getItem("user");
+    const url = "https://flixmebackend.herokuapp.com/users/";
 
-    axios.delete(`https://flixmebackend.herokuapp.com/users/${user}`, {
-      headers: { Authotization: `Bearer ${token}` },
+    axios.delete(url + user, {
+      headers: { Authotization: `Bearer ${token}` }
     })
       .then(() => {
         localStorage.removeItem("user");
         localStorage.removeItem("token");
+        setUser({
+          user: null,
+          token: null
+        });
         window.open('/login', '_self');
-      })
-      .then(() => {
         alter(user + " has been deleted.");
       })
       .catch(function (error) {
@@ -164,12 +150,8 @@ export class ProfileView extends React.Component {
   }
 
   render() {
-    const { movies } = this.props;
     console.log(this.props);
     const { UsernameInvalid, PasswordInvalid, EmailInvalid, BirthdateInvalid } = this.state;
-    const FavoriteMovieList = movies.filter((movie) => {
-      return this.state.FavoriteMovies.includes(movie._id);
-    });
 
     return (
 
@@ -257,34 +239,7 @@ export class ProfileView extends React.Component {
               </Col>
             </Row>
           </Card>
-          <Card className="p-3" bg="dark" text="secondary">
-
-            <h2 className="text-info text-center m-3">Favorite Movies</h2>
-            <Row className='mb-20'>
-              {FavoriteMovieList.map((movie) => {
-                return (
-                  <Col md={3} key={movie._id}>
-                    <div key={movie._id}>
-                      <Card className='mb-20'>
-                        <Card.Img variant="top" src={movie.ImagePath} />
-                        <Card.Body>
-                          <Link to={`/movies/${movie._id}`}>
-                            <Card.Title as='h6'>{movie.Title}</Card.Title>
-                          </Link>
-                        </Card.Body>
-                      </Card>
-                      <Button className='mb-30' onClick={() => this.removeFavorite(movie)}>Remove</Button>
-                    </div>
-                  </Col>
-                );
-              })}
-            </Row>
-
-          </Card>
-
-
         </Col>
-
       </Row >
 
     );
@@ -294,7 +249,12 @@ export class ProfileView extends React.Component {
 
   }
 }
+const mapStateToProps = (state) => {
+  const { user, movies } = state;
+  return {
+    user,
+    movies
+  }
+}
 
-
-
-export default ProfileView;
+export default connect(mapStateToProps, { setUser })(ProfileView);

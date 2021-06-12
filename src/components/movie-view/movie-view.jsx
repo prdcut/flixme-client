@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useReducer } from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
@@ -16,8 +17,27 @@ export class MovieView extends React.Component {
     this.state = {};
   }
 
+  addFavorite(movie) {
+    const token = localStorage.getItem("token");
+    const url =
+      "https://flixmebackend.herokuapp.com/users/" +
+      localStorage.getItem("user") +
+      "/favorites/"
+      + movie._id;
+
+    axios.post(url, "", {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then((response) => {
+        // console.log(response);
+        alert("Added to favorites!");
+      });
+  }
+
   render() {
     const { movie, onClick } = this.props;
+
+
 
     if (!movie) return null;
 
@@ -29,6 +49,7 @@ export class MovieView extends React.Component {
             <Card.Body>
               <Card.Title className="text-center p-3">
                 <h3 className="text-info">{movie.Title}</h3>
+                <Button variant="outline-info" className="text-info" onClick={() => { this.addFavorite(movie); }}>Favorite</Button>
               </Card.Title>
 
               <Card.Subtitle className="mb-2 text-muted">Description</Card.Subtitle>
