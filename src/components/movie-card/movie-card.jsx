@@ -2,10 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Card from 'react-bootstrap/Card';
-import CardDeck from 'react-bootstrap/CardDeck';
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
-
 
 import { Link } from 'react-router-dom';
 
@@ -17,11 +13,11 @@ export class MovieCard extends React.Component {
 
     return (
 
-      <Card className="mb-3 p-2" bg="dark" >
-        <Card.Img variant="top" src={movie.ImagePath} alt="movie poster" />
+      <Card className="movie-card mb-3 p-2" border="warning">
+        <Card.Img className="movie-card-img" variant="top" src={movie.ImagePath} alt="movie poster" />
         <Card.Title className="text-center m-1">
-          <Link to={`/movies/${movie._id}`} className="text-info">
-            <h4 className="m-1">{movie.Title}</h4>
+          <Link to={`/movies/${movie._id}`} className="text-warning">
+            <h4 className="m-3">{movie.Title}</h4>
           </Link>
         </Card.Title>
       </Card>

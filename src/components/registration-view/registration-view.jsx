@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import ReactDOM from 'react-dom';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -61,15 +60,15 @@ export function RegistrationView(props) {
   return (
     <Row className="justify-content-md-center">
       <Col md={8}>
-        <Card className="p-3" bg="dark" text="secondary">
+        <Card className="p-3 mb-3" border="warning" text="secondary">
           <Row className="justify-content-md-center">
             <Col md={9}>
               <Form noValidate>
 
-                <h2 className="text-info text-center m-3">Sing Up</h2>
+                <h2 className="text-warning text-center m-3">Sing Up</h2>
 
                 <Form.Group controlId="formEmail">
-                  <Form.Label>Email</Form.Label>
+                  <Form.Label className="text-dark">Email</Form.Label>
                   <Form.Control
                     type="email"
                     name="email"
@@ -81,7 +80,7 @@ export function RegistrationView(props) {
                 </Form.Group>
 
                 <Form.Group controlId="formUsername">
-                  <Form.Label>Username</Form.Label>
+                  <Form.Label className="text-dark">Username</Form.Label>
                   <Form.Control
                     type="text"
                     name="username"
@@ -95,7 +94,7 @@ export function RegistrationView(props) {
                 </Form.Group>
 
                 <Form.Group controlId="formPassword">
-                  <Form.Label>Password</Form.Label>
+                  <Form.Label className="text-dark">Password</Form.Label>
                   <Form.Control
                     type="password"
                     name="password"
@@ -109,7 +108,7 @@ export function RegistrationView(props) {
                 </Form.Group>
 
                 <Form.Group controlId="formBirthdate">
-                  <Form.Label>Date of Birth</Form.Label>
+                  <Form.Label className="text-dark">Date of Birth</Form.Label>
                   <Form.Control
                     type="date"
                     name="birthdate"
@@ -122,7 +121,7 @@ export function RegistrationView(props) {
 
                 <Row className="p-2 justify-content-md-center">
                   <Col md={6}>
-                    <Button variant="outline-info" className="text-info" type="submit" size="lg" block="md" onClick={handleSubmit}>Sing Up</Button>
+                    <Button variant="warning" className="text-white" type="submit" size="lg" block="md" onClick={handleSubmit}>Sing Up</Button>
                   </Col>
                 </Row>
 

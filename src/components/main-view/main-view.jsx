@@ -20,9 +20,6 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Form from 'react-bootstrap/Form';
-import FormControl from 'react-bootstrap/FormControl';
 
 import './main-view.scss';
 
@@ -85,10 +82,9 @@ class MainView extends React.Component {
       <Router>
         <div className="main-view justify-conten-center">
 
-          <Navbar bg="dark" expand="lg" sticky="top" className="mb-5 shadow-lg">
+          <Navbar bg="white" expand="lg" sticky="top" className="mb-3 shadow-md">
             <Navbar.Brand href="http://localhost:1234">
-              <img src="../img/logo.svg" width="30" height="30" className="d-inline-block align-top" alt="flixMe logo" />{' '}
-              <h1 className="text-info">flixMe</h1>
+              <h1 className="text-warning">flixMe</h1>
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
@@ -181,6 +177,8 @@ class MainView extends React.Component {
                   <Col>
                     <ProfileView movies={movies} />
                   </Col>
+                </Row>
+                <Row>
                   <Col>
                     <FavoritesList user={user} movies={movies} />
                   </Col>
@@ -188,8 +186,23 @@ class MainView extends React.Component {
               </Container>
             );
           }} />
-
         </div>
+
+        <footer className='footer bg-secondary p-3'>
+          <h6 className='text-center text-warning'>
+            Copyright &copy; 2021 | Daniel Mayorga
+      </h6>
+          <div className='text-center my-0'>
+            <a
+              className='text-white'
+              href='https://danielmayorga.de'
+              target='_blank'
+              rel='noreferrer'
+            >
+              danielmayorga.de
+        </a>
+          </div>
+        </footer>
       </Router>
     );
   }

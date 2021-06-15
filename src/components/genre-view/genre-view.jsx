@@ -6,10 +6,6 @@ import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
-import { Link } from 'react-router-dom';
-import { BrowserRouter as Router, Route } from "react-router-dom";
-
-
 export class GenreView extends React.Component {
   constructor() {
     super();
@@ -23,16 +19,16 @@ export class GenreView extends React.Component {
     return (
       <Row className="justify-content-md-center">
         <Col md={8}>
-          <Card className="p-3" bg="dark" text="white">
+          <Card className="p-3 mb-3" border="warning" text="secondary">
             <Card.Body>
               <Card.Title className="text-center p-3">
-                <h3 className="text-info">{genre.Name}</h3>
+                <h3 className="text-warning">{genre.Name}</h3>
               </Card.Title>
-              <Card.Subtitle className="mb-2 text-muted">Description</Card.Subtitle>
-              <Card.Text>{genre.Description}</Card.Text>
+              <Card.Subtitle className="mb-2 text-dark">Description</Card.Subtitle>
+              <Card.Text className="text-justify">{genre.Description}</Card.Text>
               <Row className="justify-content-md-center">
                 <Col md={4}>
-                  <Button onClick={() => { onClick(); }} variant="outline-info" className="text-info" block>Back</Button>
+                  <Button onClick={() => { onClick(); }} variant="warning" className="text-white" block>Back</Button>
                 </Col>
               </Row>
             </Card.Body>

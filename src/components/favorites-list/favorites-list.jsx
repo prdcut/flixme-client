@@ -1,13 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import axios from 'axios';
 
 import Card from 'react-bootstrap/Card';
-import CardDeck from 'react-bootstrap/CardDeck';
+import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-
 
 import { Link } from 'react-router-dom';
 
@@ -34,7 +32,7 @@ export class FavoritesList extends React.Component {
 
   getUser(token) {
     const user = localStorage.getItem("user")
-    const url = `https://flixmebackend.herokuapp.com/users/${user}`
+    const url = "https://flixmebackend.herokuapp.com/users/"
 
     axios.get(url + user, {
       headers: { Authorization: `Bearer ${token}` }
@@ -69,29 +67,31 @@ export class FavoritesList extends React.Component {
     const { FavoriteMovies } = this.state;
     const { movies } = this.props;
     return (
-      <Card className="mb-3 p-2" bg="dark">
-        <h2 className="text-info text-center m-3">Favorite Movies</h2>
-        <div>
-          {FavoriteMovies.lenght > 0 && movies.map((movie) => {
-            if (movie._id === FavoriteMovies.find((favMovie) => favMovie === movie_.id)) {
-              return (
-                <div key={movie._id}>
-                  <Card className="mb-3 p-2" bg="dark" >
-                    <Card.Img variant="top" src={movie.ImagePath} alt="movie poster" />
-                    <Card.Title className="text-center m-1">
-                      <Link to={`/movies/${movie._id}`} className="text-info">
-                        <h4 className="m-1">{movie.Title}</h4>
-                        <Button variant="outline-info" className="text-info" onClick={() => { this.removeFavorite(movie); }}>Remove</Button>
-                      </Link>
-                    </Card.Title>
-                  </Card>
-                </div>
-              );
-            }
-          })}
-        </div>
-      </Card>
+      <Row className=" flex-wrap justify-content-center">
+        <Col md={10}>
+          <Card className="mb-3 p-2" bg="light">
+            <h2 className="text-warning text-center m-3">Favorite Movies List</h2>
 
+            {FavoriteMovies.length > 0 && movies.map((movie) => {
+              if (movie._id === FavoriteMovies.find((favMovie) => favMovie === movie._id)) {
+                return (
+                  <Col md={5} key={movie._id}>
+                    <Card className="mb-3 p-2" border="warning" >
+                      <Card.Img variant="top" src={movie.ImagePath} alt="movie poster" />
+                      <Card.Title className="text-center m-1">
+                        <Link to={`/movies/${movie._id}`} className="text-warning">
+                          <h4 className="m-3">{movie.Title}</h4>
+                          <Button variant="warning" className="text-white" onClick={() => { this.removeFavorite(movie); }}>Remove</Button>
+                        </Link>
+                      </Card.Title>
+                    </Card>
+                  </Col>
+                );
+              }
+            })}
+          </Card>
+        </Col>
+      </Row>
     );
   }
 }

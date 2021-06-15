@@ -32,23 +32,23 @@ export function LoginView(props) {
   return (
     <Row className="justify-content-md-center">
       <Col md={8}>
-        <Card className="p-3" bg="dark" text="secondary">
+        <Card className="p-3 mb-3" border="warning" text="secondary">
           <Row className="justify-content-md-center">
             <Col md={9}>
               <Form>
-                <h2 className="text-info text-center m-3">Log In</h2>
+                <h2 className="text-warning text-center m-3">Log In</h2>
                 <Form.Group controlId="formUsername">
-                  <Form.Label>Username</Form.Label>
+                  <Form.Label className="text-dark">Username</Form.Label>
                   <Form.Control type="text" placeholder="Enter Username" value={username} onChange={(e) => setUsername(e.target.value)} />
                 </Form.Group>
 
                 <Form.Group controlId="formPassword">
-                  <Form.Label>Password</Form.Label>
+                  <Form.Label className="text-dark">Password</Form.Label>
                   <Form.Control type="password" placeholder="Enter Password" value={password} onChange={(e) => setPassword(e.target.value)} />
                 </Form.Group>
                 <Row className="p-2 justify-content-md-center">
                   <Col md={6}>
-                    <Button variant="outline-info" type="submit" size="lg" block="md" onClick={handleSubmit}>Log In</Button>
+                    <Button variant="warning" className="text-white" type="submit" size="lg" block="md" onClick={handleSubmit}>Log In</Button>
                   </Col>
                 </Row>
               </Form>

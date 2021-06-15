@@ -20,12 +20,12 @@ function MoviesList(props) {
   }
   if (!movies) return <div className="main-view" />;
 
-  return <Row className="justify-content-md-center">
-    <Col md={12} className="mb-5">
+  return <Row className="justify-content-center">
+    <Col md={12} className="mb-3">
       <VisibilityFilterInput visibilityFilter={visibilityFilter} />
     </Col>
     {filteredMovies.map(m => (
-      <Col md={4} key={m._id}>
+      <Col lg={4} md={6} key={m._id}>
         <MovieCard movie={m} />
       </Col>
     ))}

@@ -5,7 +5,6 @@ import axios from "axios";
 import Row from 'react-bootstrap/Row';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import FormControl from 'react-bootstrap/FormControl';
@@ -62,7 +61,7 @@ export class ProfileView extends React.Component {
     const url = "https://flixmebackend.herokuapp.com/users/";
 
     axios.delete(url + user, {
-      headers: { Authotization: `Bearer ${token}` }
+      headers: { Authorization: `Bearer ${token}` }
     })
       .then(() => {
         localStorage.removeItem("user");
@@ -71,7 +70,7 @@ export class ProfileView extends React.Component {
           user: null,
           token: null
         });
-        window.open('/login', '_self');
+        window.open('/', '_self');
         alter(user + " has been deleted.");
       })
       .catch(function (error) {
@@ -158,12 +157,12 @@ export class ProfileView extends React.Component {
 
       <Row className="justify-content-center">
 
-        <Col md={8}>
-          <Card className="p-3 mb-4" bg="dark" text="secondary">
+        <Col md={10}>
+          <Card className="p-3 mb-4" border="warning" text="secondary">
             <Row className="justify-content-md-center">
-              <Col md={9}>
+              <Col md={7}>
                 <Form className="justify-content-md-center mb-30">
-                  <h2 className="text-info text-center m-3">Update Profile</h2>
+                  <h2 className="text-warning text-center m-3">Update Profile</h2>
 
                   <Form.Group controlId="formEmail">
                     <Form.Label>
@@ -213,7 +212,7 @@ export class ProfileView extends React.Component {
                     <Form.Label>
                       Date of Birth
                 </Form.Label>
-                    <FormControl size="sm" name="Birthdate" value={this.state.Birthdate} onChange={(e) => this.handleChange(e)} required type="date" />
+                    <FormControl size="sm" name="Birthdate" value={this.state.Birthdate} onChange={(e) => this.handleChange(e)} type="date" />
                     {Object.keys(BirthdateInvalid).map((key) => {
                       return (
                         <div key={key} style={{ color: "red" }}>
@@ -226,13 +225,13 @@ export class ProfileView extends React.Component {
                   <Row className="p-2 justify-content-md-center">
                     <Col md={8}>
                       <Link to={`/users/${this.state.Username}`}>
-                        <Button variant="outline-info" type="submit" size="lg" block="md" onClick={(e) => this.handleUpdate(e)}>Save</Button>
+                        <Button variant="warning" className="text-white" type="submit" size="lg" block="md" onClick={(e) => this.handleUpdate(e)}>Save</Button>
                       </Link>
                     </Col>
                   </Row>
                   <Row className="p-2 justify-content-md-center">
                     <Col md={8}>
-                      <Button variant="outline-danger" type="submit" size="lg" block="md" onClick={() => this.handleDelete()}>Delete Account</Button>
+                      <Button variant="danger" className="text-white" type="submit" size="lg" block="md" onClick={(e) => this.handleDelete(e)}>Delete Account</Button>
                     </Col>
                   </Row>
                 </Form>
@@ -241,14 +240,10 @@ export class ProfileView extends React.Component {
           </Card>
         </Col>
       </Row >
-
     );
-
-
-
-
   }
 }
+
 const mapStateToProps = (state) => {
   const { user, movies } = state;
   return {
